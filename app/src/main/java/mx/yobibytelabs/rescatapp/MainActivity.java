@@ -1,19 +1,50 @@
 package mx.yobibytelabs.rescatapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.util.Date;
+
+import mx.yobibytelabs.rescatapp.twitter.TwitterConstants;
+import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
+import mx.yobibytelabs.rescatapp.util.Constants;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
+
+    private Button btn_login;
+    private Button btn_tweet;
+    private TextView lbl_user;
+
+    private static TwitterManager twitterManager;
+
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
+        sharedPreferences = getSharedPreferences(TwitterConstants.PREFERENCE_NAME , MODE_PRIVATE);
 
+        twitterManager = new TwitterManager(this,sharedPreferences);
+
+        btn_login = (Button) findViewById(R.id.btn_login);
+        btn_tweet = (Button) findViewById(R.id.btn_tweet);
+        lbl_user = (TextView) findViewById(R.id.lbl_user);
+        btn_login.setOnClickListener(this);
+        btn_tweet.setOnClickListener(this);
+        updateView();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +63,76 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.btn_login: // btn que nos logea con tuiter
+                if (!isTwitterConnected()){
+                    twitterManager.login();
+                }else{
+                    twitterManager.logout();
+                }
+                updateView();
+            break;
+            case R.id.btn_tweet: //btn para enviar un tuit, este tiene solo la fecha
+                String msg= DateFormat.getDateTimeInstance().format(new Date());
+                Log.i(Constants.DEBUG_TAG, msg);
+                if (isTwitterConnected())
+                    twitterManager.sendtweet(msg);
+            break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){ // si el resultado esperado de una actividad es OK
+            switch(requestCode){ // comparamos el código de petición
+                case TwitterConstants.TWITTER_CALLBACK:  // si es la petición de twitter, procesamos los permisos recibidos
+                    if(data.getData() != null){
+                        twitterManager.logincallback(data, new Runnable() {
+                            public void run() {
+                                updateView();
+                                Log.i(Constants.DEBUG_TAG, "after ActivityResult ");
+                                Toast.makeText(MainActivity.this, isTwitterConnected() ? "Logged In" : "Not Logged In", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else
+                        Toast.makeText(this, data.getExtras().getString(TwitterConstants.TWITTER_CALLBACK_REPLY), Toast.LENGTH_SHORT).show();
+                break;
+                // otros case dependiendo de las peticiones...
+            }
+        }else if(resultCode == RESULT_CANCELED){// si el resultado es la cancelación de la actividad
+
+            if(requestCode==TwitterConstants.TWITTER_CALLBACK) // si la petición era de twitter, pero esta se cancelo.
+                Toast.makeText(MainActivity.this, isTwitterConnected()? "Logged In" : "Logged Cancelled", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Verifica que la app tenga las llaves necesarias para hacer el uso de la apo
+     * @return true si estamos loggeados, false si no estamos logeados.
+     */
+    public boolean isTwitterConnected(){
+       return twitterManager.isloggedin();
+    }
+
+    /**
+    * Metodo que sirve para actualizar la vista de los botones.
+    * Depende si estamos o no conectados a twitter;
+    * */
+    public void updateView(){
+        if (isTwitterConnected()){
+            btn_tweet.setText("Tweet as " + sharedPreferences.getString("twitter_name", ""));
+            btn_tweet.setEnabled(true);
+            btn_login.setText("Log Off Twitter");
+        }else{
+            btn_tweet.setText("Not Logged in");
+            btn_tweet.setEnabled(false);
+            btn_login.setText("Log In Twitter");
+        }
     }
 }

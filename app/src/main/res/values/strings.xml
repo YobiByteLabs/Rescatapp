@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Rescatapp</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="titulo1">Registrate</string>
     <string name="action_settings">Settings</string>
 
 </resources>
