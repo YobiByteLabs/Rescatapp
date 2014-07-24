@@ -22,6 +22,26 @@
         </activity>
         <activity android:name=".twitter.TwitterWebView"
             android:label="Autentificación" />
+        <activity
+            android:name=".Datos"
+            android:label="Datos" >
+        </activity>
+        <activity
+            android:name=".Talla"
+            android:label="Talla" >
+        </activity>
+        <activity
+            android:name=".Raza"
+            android:label="Raza" >
+        </activity>
+        <activity
+            android:name=".ConfirmaDatos"
+            android:label="ConfirmaDatos" >
+        </activity>
+        <activity
+            android:name=".Genial"
+            android:label="Genial" >
+        </activity>
     </application>
 
 </manifest>
