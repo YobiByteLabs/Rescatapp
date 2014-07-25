@@ -45,8 +45,13 @@ public class Datos extends Activity implements View.OnClickListener {
         titulo = (TextView)findViewById(R.id.textView2);
         //Fuentes
          Typeface typeFace = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
+        Typeface typeFace2 = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         titulo.setTypeface(typeFace);
         continuar.setTypeface(typeFace);
+        nombre.setTypeface(typeFace2);
+        cumpleaños.setTypeface(typeFace2);
+        button1.setTypeface(typeFace2);
+        button2.setTypeface(typeFace2);
     }
 
 
