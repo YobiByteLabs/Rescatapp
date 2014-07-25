@@ -2,6 +2,7 @@ package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,11 +30,12 @@ public class Talla extends Activity implements OnItemClickListener {
         animales = new ArrayList<Animal>();
 
         rellenarArrayList();
-
+        Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
+        Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         titulo=(TextView)findViewById(R.id.textView);
         titulo.setText("¿Qué talla es "+ nombre+"?");
+        titulo.setTypeface(multicolore);
         adapter = new AnimalesAdapter(this, animales);
-
         lvAnimales = (ListView) findViewById(R.id.lvItems);
         // Asignamos el Adapter al ListView, en este punto hacemos que el
         // ListView muestre los datos que queremos.
@@ -51,6 +53,7 @@ public class Talla extends Activity implements OnItemClickListener {
      * el ListView.
      */
     private void rellenarArrayList() {
+
         animales.add(new Animal("Pequeño\nhasta 25cm", R.drawable.talla_petit));
         animales.add(new Animal("Mediano\nde 27cm hasta 50cm", R.drawable.talla_mediano));
         animales.add(new Animal("Grande\n de 53cm hasta  70cm", R.drawable.talla_grande));
@@ -66,6 +69,5 @@ public class Talla extends Activity implements OnItemClickListener {
         intent.putExtra("sexo",sexo);
         intent.putExtra("talla",animales.get(position).getNombre());
         startActivity(intent);
-
     }
 }

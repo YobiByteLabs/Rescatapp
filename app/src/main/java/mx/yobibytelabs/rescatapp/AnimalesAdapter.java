@@ -1,6 +1,7 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class AnimalesAdapter extends ArrayAdapter<Animal> {
 	private Context context;
 	private ArrayList<Animal> datos;
-
+    private  Typeface roboto;
 	/**
 	 * Constructor del Adapter.
 	 * 
@@ -46,8 +47,8 @@ public class AnimalesAdapter extends ArrayAdapter<Animal> {
 		// nombre.
 		TextView nombre = (TextView) item.findViewById(R.id.tvContent);
 		nombre.setText(datos.get(position).getNombre());
-
-
+        roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+        nombre.setTypeface(roboto);
 		// Devolvemos la vista para que se muestre en el ListView.
 		return item;
 	}
