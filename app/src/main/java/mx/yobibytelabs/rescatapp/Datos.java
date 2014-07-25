@@ -52,6 +52,7 @@ public class Datos extends Activity implements View.OnClickListener {
         cumpleaños.setTypeface(typeFace2);
         button1.setTypeface(typeFace2);
         button2.setTypeface(typeFace2);
+       foto.setAdjustViewBounds(true);
     }
 
 

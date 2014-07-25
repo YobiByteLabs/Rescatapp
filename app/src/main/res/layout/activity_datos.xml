@@ -27,6 +27,7 @@
         android:src="@drawable/selector_boton_foto"
         android:id="@+id/thumbnail"
         android:clickable="true"
+
         android:layout_gravity="center"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
