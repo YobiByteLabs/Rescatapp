@@ -1,5 +1,6 @@
 package mx.yobibytelabs.rescatapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
 import mx.yobibytelabs.rescatapp.util.Constants;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener{
 
 
     private Button btn_login;

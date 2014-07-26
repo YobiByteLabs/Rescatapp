@@ -14,20 +14,20 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:text="CREA EL PERFÍL DE TU MASCOTA"
+        android:text="CREA EL PERFÍL DE \nTU MASCOTA"
         android:textSize="25sp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:lineSpacingExtra="-1.25dp"
         android:textColor="#FFFFFF"
         android:id="@+id/textView2" />
     <ImageView
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:layout_width="190.5dp"
+        android:layout_height="190.5dp"
         android:src="@drawable/selector_boton_foto"
         android:id="@+id/thumbnail"
         android:clickable="true"
-
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
@@ -52,9 +52,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="15dp"
             android:inputType="textMultiLine"
             android:ems="10"
+            android:textColor="#8D8C8C"
             android:hint="Nombre"
             android:textSize="19dp"
             android:gravity="center"
@@ -71,8 +72,9 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
+            android:textColor="#8D8C8C"
             android:hint="Cumpleaños"
-            android:textSize="19sp"
+            android:textSize="19dp"
             android:gravity="center"
             android:id="@+id/input_cumpleanos"
             android:maxLines="2"
@@ -99,7 +101,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-
+            android:layout_marginTop="18dp"
             android:orientation="horizontal"
             android:layout_below="@+id/input_cumpleanos"
             android:id="@+id/options">
@@ -108,7 +110,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Macho"
-                android:layout_marginRight="95dp"
+                android:paddingLeft="24dp"
+                android:textColor="#8D8C8C"
+                android:layout_marginRight="94.5dp"
                 android:button="@drawable/selector_radio_dog"
                 android:id="@+id/radioButton" />
 
@@ -116,6 +120,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Hembra"
+                android:textColor="#8D8C8C"
+                android:paddingLeft="24dp"
                 android:button="@drawable/selector_radio_dog"
               android:id="@+id/radioButton2"
               android:checked="false" />

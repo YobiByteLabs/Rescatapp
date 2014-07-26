@@ -1,6 +1,7 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
