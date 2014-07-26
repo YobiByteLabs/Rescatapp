@@ -45,7 +45,7 @@ public class ConfirmaDatos extends Activity implements View.OnClickListener {
         traza.setTypeface(roboto);
         Ttalla.setTypeface(roboto);
         tcumpleaños.setTypeface(roboto);
-
+        confirmar.setTypeface(multicolore);
     }
 
 

@@ -1,22 +1,39 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class Genial extends Activity {
+public class Genial extends Activity implements View.OnClickListener {
     private  String nombre;
-    private TextView bienvenida;
+    private TextView genial,parte;
+    private Button boton_continuar,boton_agregar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genial);
-        bienvenida = (TextView)findViewById(R.id.bienvenida);
-        nombre = getIntent().getStringExtra("nombre");
-        bienvenida.setText("Bienvenida "+nombre);
+        Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
+        Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
+
+        genial =(TextView)findViewById(R.id.tvgenial);
+        genial.setTypeface(multicolore);
+
+        parte =(TextView)findViewById(R.id.tvparte_de_dogsom);
+        parte.setTypeface(multicolore);
+
+        boton_continuar = (Button)findViewById(R.id.button_continuar);
+        boton_continuar.setTypeface(multicolore);
+        boton_continuar.setOnClickListener(this);
+
+        boton_agregar = (Button)findViewById(R.id.button_agregar_otra);
+        boton_agregar.setTypeface(multicolore);
+        boton_agregar.setOnClickListener(this);
     }
 
 
@@ -37,5 +54,15 @@ public class Genial extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case (R.id.button_continuar):
+                break;
+            case (R.id.button_agregar_otra):
+                break;
+        }
     }
 }
