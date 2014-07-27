@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREA EL PERFÍL DE \nTU MASCOTA"
+        android:text="CREA EL PERFIL DE \nTU MASCOTA"
         android:textSize="25dp"
         android:gravity="center"
         android:layout_gravity="center"

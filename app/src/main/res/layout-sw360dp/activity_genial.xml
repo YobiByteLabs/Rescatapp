@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bkg_green"
+    >
+
+    <TextView
+        android:text="¡Genial!"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:layout_marginTop="16.5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvgenial"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="253dp"
+        android:layout_height="185dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/bkg_badge"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/tvgenial"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:src="@drawable/patch_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_nombre"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Ya es parte de Dogsom!"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/tvparte_de_dogsom"
+        android:layout_below="@+id/image_nombre"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18.5dp"
+        android:text="Continuar"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/button_continuar"
+        android:background="@drawable/selector_btn_rojo"
+        android:layout_below="@+id/tvparte_de_dogsom"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14.5dp"
+        android:text="Agregar Otra Mascota"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/button_agregar_otra"
+        android:background="@drawable/selector_btn_rojo"
+        android:layout_below="@+id/button_continuar"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
