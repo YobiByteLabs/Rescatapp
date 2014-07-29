@@ -1,11 +1,15 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,9 +28,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 
 public class Datos extends Activity implements View.OnClickListener {
     private static final int  REQUEST_IMAGE_CAPTURE=1;
+    private static final int SELECT_PHOTO = 2;
     private Button continuar;
     private ImageView foto;
     private TextView titulo;
@@ -83,13 +92,63 @@ public class Datos extends Activity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+        if(requestCode == REQUEST_IMAGE_CAPTURE&& resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap preview = (Bitmap)extras.get("data");
             newBitmap = getCircleBitmap(preview);
             foto.setImageBitmap(newBitmap);
-
+        }else if((requestCode == SELECT_PHOTO && resultCode == RESULT_OK)){
+            Uri selectedImage = data.getData();
+            InputStream imageStream = null;
+            try {
+                imageStream = getContentResolver().openInputStream(selectedImage);
+                Bitmap yourSelectedImage = decodeUri(selectedImage);
+                newBitmap = getCircleBitmap(yourSelectedImage);
+                newBitmap = rotateBitmap(newBitmap,90);
+                foto.setImageBitmap(newBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
+        }
+    public static Bitmap rotateBitmap(final Bitmap source, int mRotation){
+        int targetWidth=source.getWidth();
+        int targetHeight=source.getHeight();
+        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetHeight, source.getConfig());
+        Canvas canvas = new Canvas(targetBitmap);
+        Matrix matrix = new Matrix();
+        matrix.setRotate(mRotation,source.getWidth()/2,source.getHeight()/2);
+        canvas.drawBitmap(source, matrix, new Paint());
+        return  targetBitmap;
+    }
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o);
+
+        // The new size we want to scale to
+        final int REQUIRED_SIZE = 140;
+
+        // Find the correct scale value. It should be the power of 2.
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE
+                    || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o2);
+
     }
 
 
@@ -110,31 +169,58 @@ public class Datos extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.thumbnail:
-                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(intent.resolveActivity(this.getPackageManager())!=null){
-                    startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-                }
+                new AlertDialog.Builder(this).setTitle("Selecciona Foto")
+                        .setMessage("Seleccciona Opción")
+                        .setPositiveButton("Camara", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                            }
+                        })
+                        .setNegativeButton("Galería", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(intent, 2);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
                 break;
         }
 
     }
     private Bitmap getCircleBitmap(Bitmap bitmap) {
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getWidth(), Bitmap.Config.ARGB_8888);
+        Bitmap output;
+        if(bitmap.getWidth()< bitmap.getHeight()){
+            output = Bitmap.createBitmap(bitmap.getWidth(),
+                    bitmap.getWidth(), Bitmap.Config.ARGB_8888);
+        }else{
+            output = Bitmap.createBitmap(bitmap.getHeight(),
+                    bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        }
+
         final Canvas canvas = new Canvas(output);
         final int color = Color.RED;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
+        final Rect rect2 = new Rect(0, 0, bitmap.getHeight(), bitmap.getWidth());
+
 
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
         //canvas.drawOval(rectF, paint);
-        canvas.drawCircle(bitmap.getWidth()/2,bitmap.getWidth()/2,bitmap.getWidth()/2,paint);
+        if(bitmap.getWidth()< bitmap.getHeight()) {
+            canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getWidth() / 2, bitmap.getWidth() / 2, paint);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect2, rect2, paint);
+        }else{
+            canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect2, rect2, paint);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+        }
+
 
         bitmap.recycle();
 

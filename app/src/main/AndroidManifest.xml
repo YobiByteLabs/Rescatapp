@@ -7,12 +7,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:allowBackup="true"
-
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,24 +25,29 @@
             android:label="Autentificación" />
         <activity
             android:name=".Datos"
+            android:screenOrientation="portrait"
             android:label="Datos"
 
             >
         </activity>
         <activity
             android:name=".Talla"
+            android:screenOrientation="portrait"
             android:label="Talla" >
         </activity>
         <activity
             android:name=".Raza"
+            android:screenOrientation="portrait"
             android:label="Raza" >
         </activity>
         <activity
             android:name=".ConfirmaDatos"
+            android:screenOrientation="portrait"
             android:label="ConfirmaDatos" >
         </activity>
         <activity
             android:name=".Genial"
+            android:screenOrientation="portrait"
             android:label="Genial" >
         </activity>
     </application>
