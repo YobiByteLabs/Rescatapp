@@ -24,6 +24,9 @@ public class Raza extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_raza);
+        TextView titulo = (TextView)findViewById(R.id.tvRaza);
+        Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
+        titulo.setTypeface(multicolore);
         animales = new ArrayList<ListaRazas>();
 
         rellenarArrayList();

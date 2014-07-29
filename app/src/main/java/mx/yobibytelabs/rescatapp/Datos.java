@@ -1,6 +1,11 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -81,44 +86,13 @@ public class Datos extends Activity implements View.OnClickListener {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap preview = (Bitmap)extras.get("data");
-            newBitmap = resizeBitmap(preview);
+            newBitmap = getCircleBitmap(preview);
             foto.setImageBitmap(newBitmap);
+
         }
     }
 
-    private Bitmap resizeBitmap(Bitmap preview) {
-        Bitmap m= null;
-        Matrix mx = new Matrix();
-        mx.postScale(2,2);
 
-        if (preview.getWidth() >= preview.getHeight()){
-
-            m = Bitmap.createBitmap(
-                    preview,
-                    preview.getWidth()/2 - preview.getHeight()/2,
-                    0,
-                    preview.getHeight(),
-                    preview.getHeight()
-
-            );
-
-        }else{
-
-            m = Bitmap.createBitmap(
-                    preview,
-                    0,
-                    preview.getHeight()/2 - preview.getWidth()/2,
-                    preview.getWidth(),
-                    preview.getWidth()
-
-            );
-        }
-        Canvas canvas = new Canvas();
-        Paint paint = new Paint();
-        paint.setFilterBitmap(true);
-        canvas.drawBitmap(m, mx, paint);
-        return m;
-    }
 
     @Override
     public void onClick(View view) {
@@ -143,5 +117,27 @@ public class Datos extends Activity implements View.OnClickListener {
                 break;
         }
 
+    }
+    private Bitmap getCircleBitmap(Bitmap bitmap) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getWidth(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+        final int color = Color.RED;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        //canvas.drawOval(rectF, paint);
+        canvas.drawCircle(bitmap.getWidth()/2,bitmap.getWidth()/2,bitmap.getWidth()/2,paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        bitmap.recycle();
+
+        return output;
     }
 }

@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/textView"
+
         android:layout_below="@+id/imageView"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView" />
