@@ -55,16 +55,6 @@
         android:layout_below="@+id/tvparte_de_dogsom"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14.5dp"
-        android:text="Agregar Otra Mascota"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/button_agregar_otra"
-        android:background="@drawable/selector_btn_rojo"
-        android:layout_below="@+id/button_continuar"
-        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

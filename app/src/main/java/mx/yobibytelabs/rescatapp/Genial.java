@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class Genial extends Activity implements View.OnClickListener {
     private  String nombre;
     private TextView genial,parte;
-    private Button boton_continuar,boton_agregar;
+    private Button boton_continuar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +31,7 @@ public class Genial extends Activity implements View.OnClickListener {
         boton_continuar.setTypeface(multicolore);
         boton_continuar.setOnClickListener(this);
 
-        boton_agregar = (Button)findViewById(R.id.button_agregar_otra);
-        boton_agregar.setTypeface(multicolore);
-        boton_agregar.setOnClickListener(this);
+
     }
 
 
@@ -60,8 +58,6 @@ public class Genial extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case (R.id.button_continuar):
-                break;
-            case (R.id.button_agregar_otra):
                 break;
         }
     }
