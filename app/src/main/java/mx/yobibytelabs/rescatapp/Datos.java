@@ -103,8 +103,12 @@ public class Datos extends Activity implements View.OnClickListener {
             try {
                 imageStream = getContentResolver().openInputStream(selectedImage);
                 Bitmap yourSelectedImage = decodeUri(selectedImage);
-                newBitmap = getCircleBitmap(yourSelectedImage);
-                newBitmap = rotateBitmap(newBitmap,90);
+                if (yourSelectedImage.getHeight()<yourSelectedImage.getWidth()){
+                    newBitmap = getCircleBitmap(yourSelectedImage);
+                    newBitmap = rotateBitmap(newBitmap,90);
+                }else{
+                    newBitmap = getCircleBitmap(yourSelectedImage);
+                }
                 foto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
