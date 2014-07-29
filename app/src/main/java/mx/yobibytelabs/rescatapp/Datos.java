@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -40,7 +41,7 @@ public class Datos extends Activity implements View.OnClickListener {
     private ImageView foto;
     private TextView titulo;
     private EditText nombre,cumpleaños;
-    private Bitmap newBitmap;
+    private static Bitmap newBitmap;
     private RadioButton button1 = null;
     private RadioButton button2 = null;
     private String sexo;
@@ -165,6 +166,8 @@ public class Datos extends Activity implements View.OnClickListener {
                 intent = new Intent(this,Talla.class);
                 intent.putExtra("nombre",nombre.getText().toString());
                 intent.putExtra("cumpleaños",cumpleaños.getText().toString());
+
+                intent.putExtra("Bitmap",newBitmap);
                 if(button1.isChecked()) {
                     intent.putExtra("sexo","Macho");
                 } else if(button2.isChecked()) {

@@ -3,6 +3,7 @@ package mx.yobibytelabs.rescatapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -74,6 +75,7 @@ public class Raza extends Activity  {
         private ArrayList<ListaRazas> datos;
         private Typeface roboto;
         private String nombre,cumpleaños,talla,sexo;
+        private Bitmap foto;
         /**
          * Constructor del Adapter.
          *
@@ -97,6 +99,7 @@ public class Raza extends Activity  {
             cumpleaños = getIntent().getStringExtra("cumpleaños");
             talla = getIntent().getStringExtra("talla");
             sexo = getIntent().getStringExtra("sexo");
+            foto = getIntent().getParcelableExtra("foto");
 
 
             // En primer lugar "inflamos" una nueva vista, que ser� la que se
@@ -119,6 +122,7 @@ public class Raza extends Activity  {
                     intent.putExtra("cumpleaños",cumpleaños);
                     intent.putExtra("talla",talla);
                     intent.putExtra("sexo",sexo);
+                    intent.putExtra("foto",foto);
                     intent.putExtra("raza", datos.get(position).getNombre());
                     startActivity(intent);
 
@@ -135,6 +139,7 @@ public class Raza extends Activity  {
                     intent.putExtra("cumpleaños",cumpleaños);
                     intent.putExtra("talla",talla);
                     intent.putExtra("sexo",sexo);
+                    intent.putExtra("foto",foto);
                     intent.putExtra("raza",animales.get(position).getNombre2());
                     startActivity(intent);
                 }
@@ -150,6 +155,7 @@ public class Raza extends Activity  {
                     intent.putExtra("cumpleaños",cumpleaños);
                     intent.putExtra("talla",talla);
                     intent.putExtra("sexo",sexo);
+                    intent.putExtra("foto",foto);
                     intent.putExtra("raza",animales.get(position).getNombre3());
                     startActivity(intent);
                 }

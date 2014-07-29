@@ -1,6 +1,7 @@
 package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,12 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Genial extends Activity implements View.OnClickListener {
     private  String nombre;
     private TextView genial,parte;
     private Button boton_continuar;
+    private ImageView imagenPerro;
+    private Bitmap foto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,10 @@ public class Genial extends Activity implements View.OnClickListener {
 
         parte =(TextView)findViewById(R.id.tvparte_de_dogsom);
         parte.setTypeface(multicolore);
+
+        imagenPerro = (ImageView)findViewById(R.id.imagePerro);
+        foto = getIntent().getParcelableExtra("foto");
+        imagenPerro.setImageBitmap(foto);
 
         boton_continuar = (Button)findViewById(R.id.button_continuar);
         boton_continuar.setTypeface(multicolore);

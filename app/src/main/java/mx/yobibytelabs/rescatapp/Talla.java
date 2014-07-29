@@ -2,12 +2,15 @@ package mx.yobibytelabs.rescatapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,8 @@ public class Talla extends Activity implements OnItemClickListener {
     private ListView lvAnimales;
     private AnimalesAdapter adapter;
     private String nombre,cumpleaños,sexo;
+    Bitmap foto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +32,9 @@ public class Talla extends Activity implements OnItemClickListener {
         nombre = getIntent().getStringExtra("nombre");
         cumpleaños = getIntent().getStringExtra("cumpleaños");
         sexo = getIntent().getStringExtra("sexo");
+        foto = getIntent().getParcelableExtra("Bitmap");
         // Inicializamos las variables.
         animales = new ArrayList<Animal>();
-
         rellenarArrayList();
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
@@ -68,6 +73,7 @@ public class Talla extends Activity implements OnItemClickListener {
         intent.putExtra("nombre",nombre);
         intent.putExtra("cumpleaños",cumpleaños);
         intent.putExtra("sexo",sexo);
+        intent.putExtra("foto",foto);
         intent.putExtra("talla",animales.get(position).getNombre());
         startActivity(intent);
     }

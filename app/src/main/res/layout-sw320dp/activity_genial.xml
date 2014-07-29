@@ -55,6 +55,14 @@
         android:layout_below="@+id/tvparte_de_dogsom"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_marginTop="10.5dp"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:id="@+id/imagePerro"
+        android:src="@drawable/bkg_foto"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
