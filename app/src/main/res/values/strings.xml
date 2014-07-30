@@ -4,5 +4,7 @@
     <string name="app_name">Dogsom</string>
     <string name="titulo1">Registrate</string>
     <string name="action_settings">Settings</string>
+    <string name="app_id">306841632809779</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

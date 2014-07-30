@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -24,9 +25,10 @@ import java.util.Date;
 import mx.yobibytelabs.rescatapp.twitter.TwitterConstants;
 import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
 import mx.yobibytelabs.rescatapp.util.Constants;
+import mx.yobibytelabs.rescatapp.util.MainFragment;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
 
     private Button btn_login;
@@ -36,12 +38,24 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private File photo;
 
     private static TwitterManager twitterManager;
-
+    private MainFragment mainFragment;
     private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            // Add the fragment on initial activity setup
+            mainFragment = new MainFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content,mainFragment)
+                    .commit();
+        } else {
+            // Or set the fragment from restored state info
+            mainFragment = (MainFragment) getSupportFragmentManager()
+                    .findFragmentById(android.R.id.content);
+        }
         sharedPreferences = getSharedPreferences(TwitterConstants.PREFERENCE_NAME , MODE_PRIVATE);
 
         twitterManager = new TwitterManager(this,sharedPreferences);
