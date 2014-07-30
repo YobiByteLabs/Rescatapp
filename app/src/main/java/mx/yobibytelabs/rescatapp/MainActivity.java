@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -26,6 +31,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private Button btn_login;
     private Button btn_tweet;
     private TextView lbl_user;
+    private File photo;
 
     private static TwitterManager twitterManager;
 
@@ -78,12 +84,51 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 updateView();
             break;
             case R.id.btn_tweet: //btn para enviar un tuit, este tiene solo la fecha
-                String msg= DateFormat.getDateTimeInstance().format(new Date());
+                String msg="dogsom.com";
                 Log.i(Constants.DEBUG_TAG, msg);
-                if (isTwitterConnected())
-                    twitterManager.sendtweet(msg);
+
+                photo  = getFileFromInput(getResources().openRawResource(R.raw.prueba));
+                if (isTwitterConnected()){
+                    twitterManager.sendtweet(msg,photo);
+                }
             break;
         }
+    }
+
+    private File getFileFromInput(InputStream inputStream) {
+        File photo = null;
+        int read = 0;
+        byte[] bytes = new byte[1024];
+        OutputStream outputStream =null;
+
+        try{
+            outputStream  = new FileOutputStream("/Dogsom/tmp.jpg");
+
+            while((read = inputStream.read(bytes))!=-1){
+                outputStream.write(bytes,0,read);
+            }
+
+        }catch (IOException E){
+            E.printStackTrace();
+        }finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return photo;
     }
 
     @Override

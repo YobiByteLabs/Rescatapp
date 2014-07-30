@@ -10,6 +10,9 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
+
+import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -62,10 +65,12 @@ public class TwitterManager {
         return access_token!=null && access_token_secret!=null;
     }
 
-    public void sendtweet(String msg){
+    public void sendtweet(String msg,File photo){
         if(msg!=null && msg.trim().length() > 0)
-            new updateTwitterStatus().execute(msg);
+            new updateTwitterStatus(photo).execute(msg);
     }
+
+
     public void logincallback(Intent i, Runnable r){
         final Runnable postloginrunnable= r;
         Uri uri= i.getData();
@@ -173,14 +178,17 @@ public class TwitterManager {
     private class updateTwitterStatus extends AsyncTask<String, String, String>{
         String errmsg= null;
         ProgressDialog progress;
+        File photo;
+        public updateTwitterStatus(File photo){
+            this.photo = photo;
+        }
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
             progress= progressor("Tuiteando...");
         }
-        protected String doInBackground(String... args){
+        protected String doInBackground(String ... args){
             Log.d("Tweet Text", "> " + args[0]);
-            String status= args[0];
             try{
                 ConfigurationBuilder builder= new ConfigurationBuilder();
                 builder.setOAuthConsumerKey(TwitterConstants.CONSUMER_KEY);
@@ -192,7 +200,9 @@ public class TwitterManager {
                 Twitter twitter= new TwitterFactory(builder.build()).getInstance(accessToken);
 
                 // Update status
-                twitter4j.Status response= twitter.updateStatus(status);
+                StatusUpdate statusUpdate = new StatusUpdate(args[0]) ;
+                statusUpdate.setMedia(this.photo);
+                twitter4j.Status response=twitter.updateStatus(statusUpdate) ;
                 Log.d("Status", "> " + response.getText());
             }catch(TwitterException e){
                 errmsg= e.getMessage();
