@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -163,10 +164,11 @@ public class Datos extends Activity implements View.OnClickListener {
         Intent intent;
         switch (view.getId()){
             case R.id.btn_continuar:
+                if(!nombre.getText().toString().equals("")&&!cumpleaños.getText().toString().equals("")
+                        &&(button1.isChecked() || button2.isChecked()) && newBitmap!=null){
                 intent = new Intent(this,Talla.class);
                 intent.putExtra("nombre",nombre.getText().toString());
                 intent.putExtra("cumpleaños",cumpleaños.getText().toString());
-
                 intent.putExtra("Bitmap",newBitmap);
                 if(button1.isChecked()) {
                     intent.putExtra("sexo","Macho");
@@ -174,6 +176,10 @@ public class Datos extends Activity implements View.OnClickListener {
                     intent.putExtra("sexo","Hembra");
                 }
                 startActivity(intent);
+                }else{
+                    Toast.makeText(this,"Completa el formulario",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.thumbnail:
                 new AlertDialog.Builder(this).setTitle("Selecciona Foto")
