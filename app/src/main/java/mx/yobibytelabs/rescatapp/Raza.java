@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.support.v7.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,12 @@ import java.util.ArrayList;
 
 public class Raza extends Activity  {
     private ArrayList<ListaRazas> animales;
+    private ArrayList<ListaRazas> datos;
+    private Typeface roboto;
+    private String nombre,cumpleaños,talla,sexo;
+    private Bitmap foto;
+    private GridLayout gridLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +35,23 @@ public class Raza extends Activity  {
         TextView titulo = (TextView)findViewById(R.id.tvRaza);
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         titulo.setTypeface(multicolore);
+        gridLayout = new GridLayout(this);
+
+        Intent intent = new Intent(this,ConfirmaDatos.class);
+        nombre = getIntent().getStringExtra("nombre");
+        cumpleaños = getIntent().getStringExtra("cumpleaños");
+        talla = getIntent().getStringExtra("talla");
+        sexo = getIntent().getStringExtra("sexo");
+        foto = getIntent().getParcelableExtra("foto");
+
         animales = new ArrayList<ListaRazas>();
-
         rellenarArrayList();
+        ImageView image = new ImageView(this);
+        image.setImageResource(R.drawable.dog_holder);
+        gridLayout.addView(image);
+        gridLayout.addView(image);
+        gridLayout.addView(image);
 
-        RazaAdapter adapter = new RazaAdapter(this, animales);
-
-        ListView lvAnimales = (ListView) findViewById(R.id.lvraza);
-        // Asignamos el Adapter al ListView, en este punto hacemos que el
-        // ListView muestre los datos que queremos.
-        lvAnimales.setAdapter(adapter);
-        // Asignamos el Listener al ListView para cuando pulsamos sobre uno de
-        // sus items.
-        lvAnimales.setItemsCanFocus(true);
 
     }
     private void rellenarArrayList() {
@@ -69,13 +80,9 @@ public class Raza extends Activity  {
         }
         return super.onOptionsItemSelected(item);
     }
-
+/*
     class RazaAdapter extends ArrayAdapter<ListaRazas>  {
-        private Context context;
-        private ArrayList<ListaRazas> datos;
-        private Typeface roboto;
-        private String nombre,cumpleaños,talla,sexo;
-        private Bitmap foto;
+
         /**
          * Constructor del Adapter.
          *
@@ -83,7 +90,7 @@ public class Raza extends Activity  {
          *            context de la Activity que hace uso del Adapter.
          * @param datos
          *            Datos que se desean visualizar en el ListView.
-         */
+         *
         public RazaAdapter(Context context, ArrayList<ListaRazas> datos) {
             super(context, R.layout.item_raza, datos);
             // Guardamos los par�metros en variables de clase.
@@ -94,12 +101,7 @@ public class Raza extends Activity  {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            Intent intent = new Intent(context,ConfirmaDatos.class);
-            nombre = getIntent().getStringExtra("nombre");
-            cumpleaños = getIntent().getStringExtra("cumpleaños");
-            talla = getIntent().getStringExtra("talla");
-            sexo = getIntent().getStringExtra("sexo");
-            foto = getIntent().getParcelableExtra("foto");
+
 
 
             // En primer lugar "inflamos" una nueva vista, que ser� la que se
@@ -180,6 +182,8 @@ public class Raza extends Activity  {
 
 
 
-    }}
+    }
+    */
+}
 
 
