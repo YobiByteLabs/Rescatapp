@@ -1,5 +1,6 @@
 package mx.yobibytelabs.rescatapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,10 +26,11 @@ import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
 import mx.yobibytelabs.rescatapp.util.Constants;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener{
 
 
     private Button btn_login;
+    private Button formulario;
     private Button btn_tweet;
     private TextView lbl_user;
     private File photo;
@@ -43,12 +45,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences(TwitterConstants.PREFERENCE_NAME , MODE_PRIVATE);
 
         twitterManager = new TwitterManager(this,sharedPreferences);
-
+        formulario = (Button)findViewById(R.id.formulario);
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_tweet = (Button) findViewById(R.id.btn_tweet);
         lbl_user = (TextView) findViewById(R.id.lbl_user);
         btn_login.setOnClickListener(this);
         btn_tweet.setOnClickListener(this);
+        formulario.setOnClickListener(this);
         updateView();
     }
 
@@ -92,6 +95,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     twitterManager.sendtweet(msg,photo);
                 }
             break;
+            case R.id.formulario:
+                Intent intent = new Intent(this,Datos.class);
+                startActivity(intent);
+                break;
         }
     }
 
