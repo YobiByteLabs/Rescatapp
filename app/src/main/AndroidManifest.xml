@@ -27,6 +27,7 @@
             android:name=".Datos"
             android:screenOrientation="portrait"
             android:label="Datos"
+            android:windowSoftInputMode="stateVisible|adjustPan"
 
             >
         </activity>

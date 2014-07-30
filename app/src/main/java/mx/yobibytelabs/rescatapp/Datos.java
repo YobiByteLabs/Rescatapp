@@ -107,7 +107,7 @@ public class Datos extends Activity implements View.OnClickListener {
                 Bitmap yourSelectedImage = decodeUri(selectedImage);
                 if (yourSelectedImage.getHeight()<yourSelectedImage.getWidth()){
                     newBitmap = getCircleBitmap(yourSelectedImage);
-                    newBitmap = rotateBitmap(newBitmap,90);
+                   // newBitmap = rotateBitmap(newBitmap,90);
                 }else{
                     newBitmap = getCircleBitmap(yourSelectedImage);
                 }
