@@ -62,6 +62,9 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
         button1.setTypeface(typeFace2);
         button2.setTypeface(typeFace2);
         foto.setAdjustViewBounds(true);
+
+        //Datepicker
+
     }
 
 
