@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import mx.yobibytelabs.rescatapp.util.FileManager;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -65,9 +66,16 @@ public class TwitterManager {
         return access_token!=null && access_token_secret!=null;
     }
 
-    public void sendtweet(String msg,File photo){
+    public void sendtweet(String msg,int res){
+
+        File photo = FileManager.getFileFromInput(activity, activity.getResources().openRawResource(res));
         if(msg!=null && msg.trim().length() > 0)
-            new updateTwitterStatus(photo).execute(msg);
+            new updateTwitterStatus(photo).execute(msg,"YES");
+    }
+
+    public void sentTweet(String msg){
+        if(msg!=null && msg.trim().length() > 0)
+            new updateTwitterStatus().execute(msg,"NO");
     }
 
 
@@ -179,8 +187,12 @@ public class TwitterManager {
         String errmsg= null;
         ProgressDialog progress;
         File photo;
+
         public updateTwitterStatus(File photo){
             this.photo = photo;
+        }
+        public updateTwitterStatus(){
+
         }
         @Override
         protected void onPreExecute(){
@@ -201,7 +213,12 @@ public class TwitterManager {
 
                 // Update status
                 StatusUpdate statusUpdate = new StatusUpdate(args[0]) ;
-                statusUpdate.setMedia(this.photo);
+                if(this.photo == null){
+                    Log.d("DogSom","Es Nullo");
+                }
+                if(args[1].equals("YES")){
+                    statusUpdate.setMedia(this.photo);
+                }
                 twitter4j.Status response=twitter.updateStatus(statusUpdate) ;
                 Log.d("Status", "> " + response.getText());
             }catch(TwitterException e){

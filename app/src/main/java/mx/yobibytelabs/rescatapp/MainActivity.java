@@ -1,21 +1,36 @@
 package mx.yobibytelabs.rescatapp;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import mx.yobibytelabs.rescatapp.twitter.TwitterConstants;
+import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
+import mx.yobibytelabs.rescatapp.util.Constants;
+import mx.yobibytelabs.rescatapp.util.FileManager;
 import mx.yobibytelabs.rescatapp.util.MainFragment;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements MainFragment.Interfaz_Twitter{
 
 
     private MainFragment mainFragment;
+    private static TwitterManager twitterManager;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences(TwitterConstants.PREFERENCE_NAME , MODE_PRIVATE);
+        twitterManager = new TwitterManager(this,sharedPreferences);
+
         if (savedInstanceState == null) {
             // Add the fragment on initial activity setup
             mainFragment = new MainFragment();
@@ -28,25 +43,63 @@ public class MainActivity extends FragmentActivity {
             mainFragment = (MainFragment) getSupportFragmentManager()
                     .findFragmentById(android.R.id.content);
         }
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){ // si el resultado esperado de una actividad es OK
+            switch(requestCode){ // comparamos el código de petición
+                case TwitterConstants.TWITTER_CALLBACK:  // si es la petición de twitter, procesamos los permisos recibidos
+                    if(data.getData() != null){
+                        twitterManager.logincallback(data, new Runnable() {
+                            public void run() {
+                                mainFragment.updateView();
+                                Log.i(Constants.DEBUG_TAG, "after ActivityResult ");
+                                Toast.makeText(getBaseContext(), isTwitterConnected() ? "Logged In" : "Not Logged In", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else
+                        Toast.makeText(this, data.getExtras().getString(TwitterConstants.TWITTER_CALLBACK_REPLY), Toast.LENGTH_SHORT).show();
+                    break;
+                // otros case dependiendo de las peticiones...
+            }
+        }else if(resultCode == Activity.RESULT_CANCELED){// si el resultado es la cancelación de la actividad
+
+            if(requestCode==TwitterConstants.TWITTER_CALLBACK) // si la petición era de twitter, pero esta se cancelo.
+                Toast.makeText(this, isTwitterConnected() ? "Logged In" : "Logged Cancelled", Toast.LENGTH_SHORT).show();
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    public boolean isTwitterConnected(){
+        return twitterManager.isloggedin();
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return isTwitterConnected();
+    }
+
+    @Override
+    public void logIn() {
+        twitterManager.login();
+    }
+
+    @Override
+    public void logOut() {
+        twitterManager.logout();
+    }
+
+
+    @Override
+    public void sendTweet() {
+        twitterManager.sendtweet("Pronto podrás probar una nueva experiencia en dogsom.com", R.raw.prueba);
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences(){
+        return sharedPreferences;
+    }
 }

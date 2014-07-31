@@ -1,5 +1,8 @@
 package mx.yobibytelabs.rescatapp.util;
 
+import android.content.Context;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,14 +14,14 @@ import java.io.OutputStream;
  */
 public class FileManager {
 
-    public static File getFileFromInput(InputStream inputStream) {
-        File photo = null;
+    public static File getFileFromInput(Context context,InputStream inputStream) {
+        File photo = new File(context.getFilesDir(),"tmp.jpg");
         int read = 0;
         byte[] bytes = new byte[1024];
         OutputStream outputStream =null;
 
         try{
-            outputStream  = new FileOutputStream("/Dogsom/tmp.jpg");
+            outputStream  = new BufferedOutputStream(new FileOutputStream(photo));
 
             while((read = inputStream.read(bytes))!=-1){
                 outputStream.write(bytes,0,read);
@@ -36,7 +39,7 @@ public class FileManager {
             }
             if (outputStream != null) {
                 try {
-                    // outputStream.flush();
+                    outputStream.flush();
                     outputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();

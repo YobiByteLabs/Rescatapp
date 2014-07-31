@@ -41,20 +41,24 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private Button formulario;
     private Button btn_tweet;
     private TextView lbl_user;
-    private File photo;
-    private static TwitterManager twitterManager;
-    private SharedPreferences sharedPreferences;
-    private Activity contextoPrincipal;
 
     private UiLifecycleHelper uiHelper;
 
 
+    public interface Interfaz_Twitter{
+        public boolean isLoggedIn();
+        public void logIn();
+        public void logOut();
+        public void sendTweet();
+        public SharedPreferences getSharedPreferences();
+    }
+    Interfaz_Twitter interfaz;
     public MainFragment() {}
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        contextoPrincipal = activity;
+        interfaz = (Interfaz_Twitter)activity;
     }
 
     @Override
@@ -85,10 +89,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        sharedPreferences = contextoPrincipal.getSharedPreferences(TwitterConstants.PREFERENCE_NAME , contextoPrincipal.MODE_PRIVATE);
-        twitterManager = new TwitterManager(contextoPrincipal,sharedPreferences);
         updateView();
-
     }
 
     @Override
@@ -140,36 +141,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
 
-        sharedPreferences = getActivity().getSharedPreferences(TwitterConstants.PREFERENCE_NAME , contextoPrincipal.MODE_PRIVATE);
-
-        twitterManager = new TwitterManager(contextoPrincipal,sharedPreferences);
-        if (resultCode == getActivity().RESULT_OK){ // si el resultado esperado de una actividad es OK
-            switch(requestCode){ // comparamos el código de petición
-                case TwitterConstants.TWITTER_CALLBACK:  // si es la petición de twitter, procesamos los permisos recibidos
-                    if(data.getData() != null){
-                        twitterManager.logincallback(data, new Runnable() {
-                            public void run() {
-                                updateView();
-                                Log.i(Constants.DEBUG_TAG, "after ActivityResult ");
-                                Toast.makeText(contextoPrincipal, twitterManager.isloggedin() ? "Logged In" : "Not Logged In", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else
-                        Toast.makeText(contextoPrincipal, data.getExtras().getString(TwitterConstants.TWITTER_CALLBACK_REPLY), Toast.LENGTH_SHORT).show();
-                    break;
-                // otros case dependiendo de las peticiones...
-            }
-        }else if(resultCode == getActivity().RESULT_CANCELED){// si el resultado es la cancelación de la actividad
-
-            if(requestCode==TwitterConstants.TWITTER_CALLBACK) // si la petición era de twitter, pero esta se cancelo.
-                Toast.makeText(contextoPrincipal, twitterManager.isloggedin()? "Logged In" : "Logged Cancelled", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     public void updateView(){
-        if (twitterManager.isloggedin()){
-            btn_tweet.setText("Tweet as " + sharedPreferences.getString("twitter_name", ""));
+        if (interfaz.isLoggedIn()){
+            btn_tweet.setText("Tweet as " + interfaz.getSharedPreferences().getString("twitter_name", ""));
             btn_tweet.setEnabled(true);
             btn_login.setText("Log Off Twitter");
         }else{
@@ -184,24 +160,21 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btn_login: // btn que nos logea con tuiter
-                if (!twitterManager.isloggedin()){
-                    twitterManager.login();
+                if (!interfaz.isLoggedIn()){
+                    interfaz.logIn();
                 }else{
-                    twitterManager.logout();
+                    interfaz.logOut();
                 }
                 updateView();
                 break;
-            case R.id.btn_tweet: //btn para enviar un tuit, este tiene solo la fecha
-                String msg="dogsom.com";
-                Log.i(Constants.DEBUG_TAG, msg);
-
-                photo  = FileManager.getFileFromInput(getResources().openRawResource(R.raw.prueba));
-                if (twitterManager.isloggedin()){
-                    twitterManager.sendtweet(msg,photo);
+           /* case R.id.btn_tweet: //btn para enviar un tuit, este tiene solo la fecha
+                Log.i(Constants.DEBUG_TAG,"el mensaje se envia ");
+                if (interfaz.isLoggedIn()){
+                    interfaz.sendTweet();
                 }
-                break;
+                break;*/
             case R.id.formulario:
-                Intent intent = new Intent(contextoPrincipal,Datos.class);
+                Intent intent = new Intent(getActivity(),Datos.class);
                 startActivity(intent);
                 break;
         }
