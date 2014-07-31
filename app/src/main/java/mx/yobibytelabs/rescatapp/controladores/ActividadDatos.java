@@ -2,6 +2,7 @@ package mx.yobibytelabs.rescatapp.controladores;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -20,6 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
@@ -37,7 +42,6 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
     private RadioButton button1 = null;
     private RadioButton button2 = null;
     private String sexo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,8 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
         continuar.setTypeface(typeFace);
         nombre.setTypeface(typeFace2);
         cumpleaños.setTypeface(typeFace2);
+        cumpleaños.setOnClickListener(this);
+        cumpleaños.setFocusable(false);
         button1.setTypeface(typeFace2);
         button2.setTypeface(typeFace2);
         foto.setAdjustViewBounds(true);
@@ -122,6 +128,7 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
                     Confirmacion.setNombre(nombre.getText().toString());
                     Confirmacion.setCumpleaños(cumpleaños.getText().toString());
                     Confirmacion.setBitmap(newBitmap);
+
                     if (button1.isChecked()) {
                         Confirmacion.setSexo("Macho");
 
@@ -134,6 +141,23 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
                     Toast.makeText(this, "Completa el formulario", Toast.LENGTH_SHORT).show();
                 }
 
+                break;
+            case R.id.input_cumpleanos:
+                final Calendar myCalendar = Calendar.getInstance();
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "MM/dd/yy"; //In which you need put here
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        cumpleaños.setText(sdf.format(myCalendar.getTime()));
+                    }
+                };
+                new DatePickerDialog(this,date,myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 break;
             case R.id.thumbnail:
                 new AlertDialog.Builder(this).setTitle("Selecciona Foto")
