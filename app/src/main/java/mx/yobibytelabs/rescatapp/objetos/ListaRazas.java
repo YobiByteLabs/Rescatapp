@@ -1,17 +1,15 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.objetos;
 
 public class ListaRazas {
-    private String nombre="";
-    private String nombre2="";
-    private String nombre3="";
-    private int drawableImageID=0;
-    private int drawableImageID2=0;
-    private int drawableImageID3=0;
+    private String nombre = "";
+    private String nombre2 = "";
+    private String nombre3 = "";
+    private int drawableImageID = 0;
+    private int drawableImageID2 = 0;
+    private int drawableImageID3 = 0;
 
 
-
-
-    public ListaRazas(String nombre, int drawableImageID,String nombre2, int drawableImageID2,String nombre3, int drawableImageID3) {
+    public ListaRazas(String nombre, int drawableImageID, String nombre2, int drawableImageID2, String nombre3, int drawableImageID3) {
         this.nombre = nombre;
         this.drawableImageID = drawableImageID;
         this.nombre2 = nombre2;
@@ -19,7 +17,8 @@ public class ListaRazas {
         this.nombre3 = nombre3;
         this.drawableImageID3 = drawableImageID3;
     }
-    public ListaRazas(String nombre, int drawableImageID,String nombre2, int drawableImageID2) {
+
+    public ListaRazas(String nombre, int drawableImageID, String nombre2, int drawableImageID2) {
         this.nombre = nombre;
         this.drawableImageID = drawableImageID;
         this.nombre2 = nombre2;
@@ -54,6 +53,7 @@ public class ListaRazas {
     public void setNombre2(String nombre2) {
         this.nombre2 = nombre2;
     }
+
     public int getDrawableImageID2() {
         return drawableImageID2;
     }
@@ -61,6 +61,7 @@ public class ListaRazas {
     public void setDrawableImageID2(int drawableImageID2) {
         this.drawableImageID2 = drawableImageID2;
     }
+
     public String getNombre3() {
         return nombre3;
     }
@@ -68,6 +69,7 @@ public class ListaRazas {
     public void setNombre3(String nombre3) {
         this.nombre3 = nombre3;
     }
+
     public int getDrawableImageID3() {
         return drawableImageID3;
     }

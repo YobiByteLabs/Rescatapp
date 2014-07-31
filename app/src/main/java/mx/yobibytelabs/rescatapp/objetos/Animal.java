@@ -1,4 +1,4 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.objetos;
 
 public class Animal {
 	private String nombre;

@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".controladores.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
@@ -24,7 +24,7 @@
         <activity android:name=".twitter.TwitterWebView"
             android:label="Autentificación" />
         <activity
-            android:name=".Datos"
+            android:name=".controladores.ActividadDatos"
             android:screenOrientation="portrait"
             android:label="Datos"
             android:windowSoftInputMode="stateVisible|adjustPan"
@@ -32,22 +32,22 @@
             >
         </activity>
         <activity
-            android:name=".Talla"
+            android:name=".controladores.ActividadTalla"
             android:screenOrientation="portrait"
             android:label="Talla" >
         </activity>
         <activity
-            android:name=".Raza"
+            android:name=".controladores.ActividadRaza"
             android:screenOrientation="portrait"
             android:label="Raza" >
         </activity>
         <activity
-            android:name=".ConfirmaDatos"
+            android:name=".controladores.ActividadConfirmacion"
             android:screenOrientation="portrait"
             android:label="ConfirmaDatos" >
         </activity>
         <activity
-            android:name=".Genial"
+            android:name=".controladores.ActividadCompartir"
             android:screenOrientation="portrait"
             android:label="Genial" >
         </activity>

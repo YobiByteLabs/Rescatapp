@@ -1,23 +1,25 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.controladores;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Talla extends Activity implements OnItemClickListener {
+import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.adapters.AnimalesAdapter;
+import mx.yobibytelabs.rescatapp.controladores.ActividadRaza;
+import mx.yobibytelabs.rescatapp.objetos.Animal;
+
+public class ActividadTalla extends Activity implements OnItemClickListener {
     private ArrayList<Animal> animales;
     private TextView titulo;
     private ListView lvAnimales;
@@ -69,7 +71,7 @@ public class Talla extends Activity implements OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position,
                             long ID) {
-        Intent intent = new Intent(this,Raza.class);
+        Intent intent = new Intent(this,ActividadRaza.class);
         intent.putExtra("nombre",nombre);
         intent.putExtra("cumpleaños",cumpleaños);
         intent.putExtra("sexo",sexo);

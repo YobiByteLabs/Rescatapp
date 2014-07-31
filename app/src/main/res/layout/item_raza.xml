@@ -1,0 +1,24 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_raza_adapter"
+        android:src="@drawable/dog_holder"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Aquí va Nombre"
+        android:id="@+id/lbl_raza_adapter"
+        android:layout_below="@+id/img_raza_adapter"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

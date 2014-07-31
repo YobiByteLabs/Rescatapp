@@ -1,4 +1,4 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.controladores;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Genial extends Activity implements View.OnClickListener {
+import mx.yobibytelabs.rescatapp.R;
+
+public class ActividadCompartir extends Activity implements View.OnClickListener {
     private  String nombre;
     private TextView genial,parte;
     private Button boton_continuar;

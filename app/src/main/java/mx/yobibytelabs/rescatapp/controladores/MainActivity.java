@@ -1,4 +1,4 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.controladores;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,15 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
+import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.twitter.TwitterConstants;
 import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
 import mx.yobibytelabs.rescatapp.util.Constants;
-import mx.yobibytelabs.rescatapp.util.FileManager;
-import mx.yobibytelabs.rescatapp.util.MainFragment;
+import mx.yobibytelabs.rescatapp.fragments.MainFragment;
 
 
 public class MainActivity extends FragmentActivity implements MainFragment.Interfaz_Twitter{

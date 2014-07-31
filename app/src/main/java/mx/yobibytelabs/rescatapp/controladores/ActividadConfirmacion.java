@@ -1,11 +1,10 @@
-package mx.yobibytelabs.rescatapp;
+package mx.yobibytelabs.rescatapp.controladores;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ConfirmaDatos extends Activity implements View.OnClickListener {
+import mx.yobibytelabs.rescatapp.R;
+
+public class ActividadConfirmacion extends Activity implements View.OnClickListener {
     private Button confirmar;
     private TextView datos,tnombre,tcumpleaños,traza,tsexo,Ttalla;
     private String nombre,cumpleaños,talla,raza,sexo;
@@ -81,7 +82,7 @@ public class ConfirmaDatos extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this,Genial.class);
+        Intent intent = new Intent(this,ActividadCompartir.class);
         intent.putExtra("nombre",nombre);
         intent.putExtra("foto",foto);
         startActivity(intent);
