@@ -83,7 +83,7 @@ public class RazaAdapter extends BaseAdapter{
 
 
     private void irAConfirmacion(int position) {
-        Confirmacion.setRaza(datos.get(position).getNombre3());
+        Confirmacion.setRaza(datos.get(position).getNombre());
         Intent intent = new Intent(context, ActividadConfirmacion.class);
         context.startActivity(intent);
     }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
 public class ActividadCompartir extends ActionBarActivity implements View.OnClickListener {
     private  String nombre;
@@ -35,9 +36,8 @@ public class ActividadCompartir extends ActionBarActivity implements View.OnClic
         parte =(TextView)findViewById(R.id.tvparte_de_dogsom);
         parte.setTypeface(multicolore);
 
-        imagenPerro = (ImageView)findViewById(R.id.imagePerro);
-        foto = getIntent().getParcelableExtra("foto");
-        imagenPerro.setImageBitmap(foto);
+        imagenPerro = (ImageView)findViewById(R.id.imagenPerro);
+        imagenPerro.setImageBitmap(Confirmacion.getBitmap());
 
         boton_continuar = (Button)findViewById(R.id.button_continuar);
         boton_continuar.setTypeface(multicolore);

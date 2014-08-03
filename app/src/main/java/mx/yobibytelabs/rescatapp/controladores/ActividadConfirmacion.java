@@ -14,11 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
 public class ActividadConfirmacion extends ActionBarActivity implements View.OnClickListener {
     private Button confirmar;
     private TextView datos,tnombre,tcumpleaños,traza,tsexo,Ttalla;
-    private String nombre,cumpleaños,talla,raza,sexo;
     private Bitmap foto;
     private ImageView imageView;
     @Override
@@ -36,24 +36,18 @@ public class ActividadConfirmacion extends ActionBarActivity implements View.OnC
         confirmar = (Button)findViewById(R.id.button_confirmar);
         confirmar.setOnClickListener(this);
 
-        nombre = getIntent().getStringExtra("nombre");
-        cumpleaños = getIntent().getStringExtra("cumpleaños");
-        talla = getIntent().getStringExtra("talla");
-        raza = getIntent().getStringExtra("raza");
-        sexo = getIntent().getStringExtra("sexo");
-
-        foto = (Bitmap)getIntent().getParcelableExtra("foto");
         imageView = (ImageView)findViewById(R.id.imageView2);
-        imageView.setImageBitmap(foto);
+        imageView.setImageBitmap(Confirmacion.getBitmap());
 
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         datos.setTypeface(multicolore);
-        tnombre.setText(tnombre.getText().toString()+"\n"+ nombre);
-        tcumpleaños.setText(tcumpleaños.getText().toString()+"\n"+ cumpleaños);
-        tsexo.setText(tsexo.getText().toString()+" "+ sexo);
-        traza.setText(traza.getText().toString()+" "+raza);
-        Ttalla.setText(Ttalla.getText().toString()+" "+talla);
+        tnombre.setText(tnombre.getText().toString()+"\n"+ Confirmacion.getNombre());
+        tcumpleaños.setText(tcumpleaños.getText().toString()+"\n"+ Confirmacion.getCumpleaños());
+        tsexo.setText(tsexo.getText().toString()+" "+ Confirmacion.getSexo());
+        traza.setText(traza.getText().toString()+" "+Confirmacion.getRaza());
+        Ttalla.setText(Ttalla.getText().toString()+" "+Confirmacion.getTalla());
+
         tnombre.setTypeface(roboto);
         tsexo.setTypeface(roboto);
         traza.setTypeface(roboto);
@@ -64,29 +58,8 @@ public class ActividadConfirmacion extends ActionBarActivity implements View.OnC
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.confirma_datos, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onClick(View view) {
         Intent intent = new Intent(this,ActividadCompartir.class);
-        intent.putExtra("nombre",nombre);
-        intent.putExtra("foto",foto);
         startActivity(intent);
     }
 }
