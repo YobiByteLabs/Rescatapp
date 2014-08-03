@@ -19,16 +19,20 @@
         android:layout_width="253dp"
         android:layout_height="185dp"
         android:id="@+id/imagenPerro"
-        android:src="@drawable/bkg_badge"
+        android:background="@drawable/bkg_badge"
         android:layout_marginTop="13dp"
         android:layout_below="@+id/tvgenial"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:src="@drawable/patch_name"
+    <TextView
+        android:background="@drawable/patch_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/image_nombre"
+        android:textColor="#6FB501"
+        android:gravity="center"
+       android:text="Kenia"
+        android:textSize="30sp"
         android:layout_below="@+id/imagenPerro"
         android:layout_centerHorizontal="true" />
 

@@ -17,7 +17,7 @@ import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
 public class ActividadCompartir extends ActionBarActivity implements View.OnClickListener {
     private  String nombre;
-    private TextView genial,parte;
+    private TextView genial,parte , imagenNombre;
     private Button boton_continuar;
     private ImageView imagenPerro;
     private Bitmap foto;
@@ -30,11 +30,15 @@ public class ActividadCompartir extends ActionBarActivity implements View.OnClic
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
 
+        imagenNombre = (TextView)findViewById(R.id.image_nombre);
         genial =(TextView)findViewById(R.id.tvgenial);
-        genial.setTypeface(multicolore);
-
         parte =(TextView)findViewById(R.id.tvparte_de_dogsom);
+
+        genial.setTypeface(multicolore);
+        imagenNombre.setTypeface(multicolore);
         parte.setTypeface(multicolore);
+
+        imagenNombre.setText(Confirmacion.getNombre());
 
         imagenPerro = (ImageView)findViewById(R.id.imagenPerro);
         imagenPerro.setImageBitmap(Confirmacion.getBitmap());
