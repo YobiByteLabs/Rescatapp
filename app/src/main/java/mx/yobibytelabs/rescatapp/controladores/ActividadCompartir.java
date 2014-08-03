@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import mx.yobibytelabs.rescatapp.R;
 
-public class ActividadCompartir extends Activity implements View.OnClickListener {
+public class ActividadCompartir extends ActionBarActivity implements View.OnClickListener {
     private  String nombre;
     private TextView genial,parte;
     private Button boton_continuar;
@@ -25,6 +25,7 @@ public class ActividadCompartir extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genial);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
 

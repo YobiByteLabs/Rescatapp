@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,8 +19,9 @@ import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.adapters.AnimalesAdapter;
 import mx.yobibytelabs.rescatapp.controladores.ActividadRaza;
 import mx.yobibytelabs.rescatapp.objetos.Animal;
+import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
-public class ActividadTalla extends Activity implements OnItemClickListener {
+public class ActividadTalla extends ActionBarActivity implements OnItemClickListener {
     private ArrayList<Animal> animales;
     private TextView titulo;
     private ListView lvAnimales;
@@ -31,17 +33,16 @@ public class ActividadTalla extends Activity implements OnItemClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview_talla);
-        nombre = getIntent().getStringExtra("nombre");
-        cumpleaños = getIntent().getStringExtra("cumpleaños");
-        sexo = getIntent().getStringExtra("sexo");
-        foto = getIntent().getParcelableExtra("Bitmap");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Inicializamos las variables.
         animales = new ArrayList<Animal>();
         rellenarArrayList();
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         titulo=(TextView)findViewById(R.id.textView);
-        titulo.setText("¿Qué talla es "+ nombre+"?");
+        titulo.setText("¿Qué talla es "+ Confirmacion.getNombre()+"?");
         titulo.setTypeface(multicolore);
         adapter = new AnimalesAdapter(this, animales);
         lvAnimales = (ListView) findViewById(R.id.lvItems);
@@ -72,11 +73,7 @@ public class ActividadTalla extends Activity implements OnItemClickListener {
     public void onItemClick(AdapterView<?> adapter, View view, int position,
                             long ID) {
         Intent intent = new Intent(this,ActividadRaza.class);
-        intent.putExtra("nombre",nombre);
-        intent.putExtra("cumpleaños",cumpleaños);
-        intent.putExtra("sexo",sexo);
-        intent.putExtra("foto",foto);
-        intent.putExtra("talla",animales.get(position).getNombre());
+        Confirmacion.setTalla(animales.get(position).getNombre());
         startActivity(intent);
     }
 }

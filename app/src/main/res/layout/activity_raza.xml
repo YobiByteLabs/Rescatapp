@@ -3,27 +3,27 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/bkg">
-
-
-
     <TextView
         android:id="@+id/tvRaza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="30sp"
+        android:layout_marginTop="40dp"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:textAppearanceLarge"
         android:text="¿Qué raza es?" />
 
     <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridView"
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        android:background="@android:color/darker_gray"
         android:numColumns="3"
-
-        android:layout_below="@+id/tvRaza"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="82dp" />
+        android:verticalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
 
 </RelativeLayout>

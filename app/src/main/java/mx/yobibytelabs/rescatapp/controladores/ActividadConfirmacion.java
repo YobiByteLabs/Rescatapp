@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import mx.yobibytelabs.rescatapp.R;
 
-public class ActividadConfirmacion extends Activity implements View.OnClickListener {
+public class ActividadConfirmacion extends ActionBarActivity implements View.OnClickListener {
     private Button confirmar;
     private TextView datos,tnombre,tcumpleaños,traza,tsexo,Ttalla;
     private String nombre,cumpleaños,talla,raza,sexo;
@@ -23,6 +24,7 @@ public class ActividadConfirmacion extends Activity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_confirma_datos);
         tnombre = (TextView)findViewById(R.id.textview_nombre);
         tcumpleaños = (TextView)findViewById(R.id.textView_cumpleanos);

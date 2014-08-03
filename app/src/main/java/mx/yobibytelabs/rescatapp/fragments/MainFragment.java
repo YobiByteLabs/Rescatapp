@@ -3,9 +3,13 @@ package mx.yobibytelabs.rescatapp.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,8 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import mx.yobibytelabs.rescatapp.controladores.ActividadDatos;
@@ -76,6 +82,22 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
+
+
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "mx.yobibytelabs.rescatapp",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
     @Override
@@ -84,14 +106,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         updateView();
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
-        Session session = Session.getActiveSession();
+        /*Session session = Session.getActiveSession();
+        Log.d("Dogsom Session","sesion +"+ session.getApplicationId());
         if (session != null &&
                 (session.isOpened() || session.isClosed()) ) {
             onSessionStateChange(session, session.getState(), null);
-        }
+        }*/
         uiHelper.onResume();
     }
 

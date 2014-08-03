@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,56 +20,71 @@ import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
 
 
-public class RazaAdapter extends ArrayAdapter<ListaRazas>{
+public class RazaAdapter extends BaseAdapter{
 
 
     Context context;
     List<ListaRazas> datos;
-        /**
-         * Constructor del Adapter.
-         * @param context context de la Activity que hace uso del Adapter.
-         * @param datos que se desean visualizar en el ListView.
-         */
-        public RazaAdapter(Context context, ArrayList<ListaRazas> datos) {
-            super(context, R.layout.item_raza, datos);
-            // Guardamos los par�metros en variables de clase.
-            this.context = context;
-            this.datos = datos;
 
-        }
+    public RazaAdapter(Context context, ArrayList<ListaRazas> datos) {
+        // Guardamos los par�metros en variables de clase.
+        this.context = context;
+        this.datos = datos;
+    }
+
+    @Override
+    public int getCount() {
+        return datos.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    public static class ViewHolder{
+        ImageView img_raza_adapter;
+        TextView lbl_raza_adapter;
+    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        View vi = convertView;
+        ViewHolder viewHolder;
+        if(convertView ==null) {
+            vi = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                    .inflate(R.layout.item_raza, null);
+            viewHolder = new ViewHolder();
+            viewHolder.img_raza_adapter = (ImageView) vi.findViewById(R.id.img_raza_adapter);
+            viewHolder.lbl_raza_adapter = (TextView) vi.findViewById(R.id.lbl_raza_adapter);
 
-        Typeface roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
-        View item = LayoutInflater.from(context).inflate(R.layout.item_raza, null);
+            Typeface roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+            viewHolder.img_raza_adapter.setImageResource(datos.get(position).getDrawableImageID());
 
-
-        ImageView imagen = (ImageView) item.findViewById(R.id.img_raza_adapter);
-        imagen.setImageResource(datos.get(position).getDrawableImageID());
-
-        imagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                irAConfirmacion(position);
-            }
-        });
-
-        // Recogemos el TextView para mostrar el nombre y establecemos el
-        // nombre.
-        TextView tv1 = (TextView) item.findViewById(R.id.textView);
-        tv1.setText(datos.get(position).getNombre());
-        tv1.setTypeface(roboto);
-
-
-        return item;
+            viewHolder.img_raza_adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    irAConfirmacion(position);
+                }
+            });
+            viewHolder.lbl_raza_adapter.setText(datos.get(position).getNombre());
+            viewHolder.lbl_raza_adapter.setTypeface(roboto);
+            vi.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder)vi.getTag();
+        }
+        return convertView;
     }
 
 
-
-    private void irAConfirmacion(int position){
+    private void irAConfirmacion(int position) {
         Confirmacion.setRaza(datos.get(position).getNombre3());
-        Intent intent = new Intent(context,ActividadConfirmacion.class);
+        Intent intent = new Intent(context, ActividadConfirmacion.class);
         context.startActivity(intent);
     }
 

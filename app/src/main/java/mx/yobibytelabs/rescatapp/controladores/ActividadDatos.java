@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.util.BitmapManager;
 
 
-public class ActividadDatos extends Activity implements View.OnClickListener {
+public class ActividadDatos extends ActionBarActivity implements View.OnClickListener {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int SELECT_PHOTO = 2;
     private Button continuar;
@@ -42,11 +43,13 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
     private RadioButton button1 = null;
     private RadioButton button2 = null;
     private String sexo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(
                 R.layout.activity_datos);
+
         nombre = (EditText) findViewById(R.id.input_nombre);
         cumpleaños = (EditText) findViewById(R.id.input_cumpleanos);
         continuar = (Button) findViewById(R.id.btn_continuar);
@@ -155,9 +158,10 @@ public class ActividadDatos extends Activity implements View.OnClickListener {
                         cumpleaños.setText(sdf.format(myCalendar.getTime()));
                     }
                 };
-                new DatePickerDialog(this,date,myCalendar
+                new DatePickerDialog(this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH)
+                ).show();
                 break;
             case R.id.thumbnail:
                 new AlertDialog.Builder(this).setTitle("Selecciona Foto")

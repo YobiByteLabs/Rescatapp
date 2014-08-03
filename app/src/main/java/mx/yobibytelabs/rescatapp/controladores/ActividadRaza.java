@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.GridLayout;
@@ -15,15 +16,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.adapters.RazaAdapter;
 import mx.yobibytelabs.rescatapp.controladores.ActividadConfirmacion;
+import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
 
-public class ActividadRaza extends Activity  {
+public class ActividadRaza extends ActionBarActivity {
     private ArrayList<ListaRazas> animales;
-    private ArrayList<ListaRazas> datos;
     private Typeface roboto;
-    private String nombre,cumpleaños,talla,sexo;
-    private Bitmap foto;
+
     private GridView gridView;
 
 
@@ -31,24 +32,16 @@ public class ActividadRaza extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_raza);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         TextView titulo = (TextView)findViewById(R.id.tvRaza);
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         titulo.setTypeface(multicolore);
-        gridView = (GridView)findViewById(R.id.gridView);
-
-
-        nombre = getIntent().getStringExtra("nombre");
-        cumpleaños = getIntent().getStringExtra("cumpleaños");
-        talla = getIntent().getStringExtra("talla");
-        sexo = getIntent().getStringExtra("sexo");
-        foto = getIntent().getParcelableExtra("foto");
-
+        titulo.setText("¿Qué Raza es "+ Confirmacion.getNombre());
+        gridView = (GridView)findViewById(R.id.gridview);
         animales = new ArrayList<ListaRazas>();
         rellenarArrayList();
-        ImageView image = new ImageView(this);
-        image.setImageResource(R.drawable.dog_holder);
-
-
+        gridView.setAdapter( new RazaAdapter(this,animales));
 
     }
     private void rellenarArrayList() {
@@ -58,25 +51,6 @@ public class ActividadRaza extends Activity  {
         animales.add(new ListaRazas("ocho",R.drawable.dog_holder,"nueve",R.drawable.dog_holder));
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.raza, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
 
 

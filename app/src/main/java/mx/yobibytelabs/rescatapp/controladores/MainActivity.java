@@ -9,10 +9,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.fragments.MainFragment;
 import mx.yobibytelabs.rescatapp.twitter.TwitterConstants;
 import mx.yobibytelabs.rescatapp.twitter.TwitterManager;
 import mx.yobibytelabs.rescatapp.util.Constants;
-import mx.yobibytelabs.rescatapp.fragments.MainFragment;
 
 
 public class MainActivity extends FragmentActivity implements MainFragment.Interfaz_Twitter{
