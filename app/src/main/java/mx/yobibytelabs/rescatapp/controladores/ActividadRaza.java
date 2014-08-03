@@ -42,13 +42,22 @@ public class ActividadRaza extends ActionBarActivity {
         animales = new ArrayList<ListaRazas>();
         rellenarArrayList();
         gridView.setAdapter( new RazaAdapter(this,animales));
+        gridView.setNumColumns(3);
 
     }
     private void rellenarArrayList() {
         animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("dos", R.drawable.dog_holder,"tres", R.drawable.dog_holder,"cuatro", R.drawable.dog_holder));
-        animales.add(new ListaRazas("cinco", R.drawable.dog_holder,"seis", R.drawable.icn_mixed,"siete", R.drawable.dog_holder));
-        animales.add(new ListaRazas("ocho",R.drawable.dog_holder,"nueve",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+
     }
 
 }

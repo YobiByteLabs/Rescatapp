@@ -48,16 +48,16 @@ public class RazaAdapter extends BaseAdapter{
     }
 
     public static class ViewHolder{
-        ImageView img_raza_adapter;
-        TextView lbl_raza_adapter;
+       public ImageView img_raza_adapter;
+       public TextView lbl_raza_adapter;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         ViewHolder viewHolder;
-        if(convertView ==null) {
-            vi = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+        if(vi ==null) {
+            vi = ((LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE))
                     .inflate(R.layout.item_raza, null);
             viewHolder = new ViewHolder();
             viewHolder.img_raza_adapter = (ImageView) vi.findViewById(R.id.img_raza_adapter);
@@ -78,7 +78,7 @@ public class RazaAdapter extends BaseAdapter{
         }else{
             viewHolder = (ViewHolder)vi.getTag();
         }
-        return convertView;
+        return vi;
     }
 
 
