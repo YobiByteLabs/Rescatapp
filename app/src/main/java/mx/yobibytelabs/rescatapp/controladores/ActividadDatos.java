@@ -9,11 +9,14 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,6 +33,7 @@ import java.util.Locale;
 import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.util.BitmapManager;
+import mx.yobibytelabs.rescatapp.util.Constants;
 
 
 public class ActividadDatos extends ActionBarActivity implements View.OnClickListener {
@@ -95,6 +99,7 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(Constants.DEBUG_TAG,"RequestCode : "+ requestCode + " resultCode: "+ resultCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap preview = (Bitmap) extras.get("data");
@@ -118,6 +123,25 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
             }
         }
     }
+
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            Intent intent;
+            Log.d(Constants.DEBUG_TAG, "la posición es " + i);
+            switch (i) {
+                case 0:
+                    intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    break;
+                case 1:
+                    intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 2);
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -164,21 +188,10 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
                 ).show();
                 break;
             case R.id.thumbnail:
-                new AlertDialog.Builder(this).setTitle("Selecciona Foto")
-                        .setMessage("Seleccciona Opción")
-                        .setPositiveButton("Camara", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-                            }
-                        })
-                        .setNegativeButton("Galería", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                startActivityForResult(intent, 2);
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                new AlertDialog.Builder(this)
+                        .setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[]{"Cámara", "Galería"}),
+                             listener
+                        )
                         .show();
                 break;
         }

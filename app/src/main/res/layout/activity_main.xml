@@ -10,36 +10,22 @@
     tools:context=".MainActivity">
 
 
-
-    <Button
-        android:layout_width="237dp"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_twitter"
-        android:id="@+id/btn_login"
-        android:layout_below="@+id/authButton"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
+    <com.facebook.widget.LoginButton
+        xmlns:fb="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/authButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lbl_user"
-        android:layout_below="@+id/btn_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
-
-
-
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
-        android:layout_width="237.5dp"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_facebook"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignLeft="@+id/btn_login"
-        android:layout_alignStart="@+id/btn_login" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        fb:login_text=""
+        fb:logout_text=""
+        />
 
     <ImageView
         android:layout_marginTop="25dp"
@@ -49,6 +35,15 @@
         android:background="@drawable/dogsom_app_logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="provisional"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="iniciar"  />
 
 
 </RelativeLayout>

@@ -2,11 +2,22 @@ package mx.yobibytelabs.rescatapp.objetos;
 
 public class Animal {
 	private String nombre;
-	private int drawableImageID;
+    private String titulo;
 
-	public Animal(String nombre, int drawableImageID) {
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    private int drawableImageID;
+
+	public Animal(String titulo,String nombre, int drawableImageID) {
 		this.nombre = nombre;
 		this.drawableImageID = drawableImageID;
+        this.titulo = titulo;
 	}
 
 	public String getNombre() {

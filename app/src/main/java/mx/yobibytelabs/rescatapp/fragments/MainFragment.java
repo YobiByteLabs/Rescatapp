@@ -28,6 +28,7 @@ import java.util.Arrays;
 
 import mx.yobibytelabs.rescatapp.controladores.ActividadDatos;
 import mx.yobibytelabs.rescatapp.R;
+import mx.yobibytelabs.rescatapp.util.Constants;
 
 
 public class MainFragment extends Fragment implements View.OnClickListener {
@@ -35,10 +36,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "MainFragment";
 
     private Button btn_login;
-    private Button formulario;
-    private Button btn_tweet;
-    private TextView lbl_user;
-
+    private LoginButton authButton;
     private UiLifecycleHelper uiHelper;
 
 
@@ -47,6 +45,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         public void logIn();
         public void logOut();
         public void sendTweet();
+        public void iniciarDatos();
         public SharedPreferences getSharedPreferences();
     }
     Interfaz_Twitter interfaz;
@@ -64,16 +63,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_main, container, false);
-        LoginButton authButton = (LoginButton) view.findViewById(R.id.authButton);
+        authButton = (LoginButton) view.findViewById(R.id.authButton);
         authButton.setFragment(this);
         authButton.setReadPermissions(Arrays.asList("email", "public_profile"));
-        formulario = (Button)view.findViewById(R.id.formulario);
-        btn_login = (Button) view.findViewById(R.id.btn_login);
-        btn_tweet = (Button) view.findViewById(R.id.btn_tweet);
-        lbl_user = (TextView) view.findViewById(R.id.lbl_user);
-        btn_login.setOnClickListener(this);
-        btn_tweet.setOnClickListener(this);
-        formulario.setOnClickListener(this);
+        authButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+
+        //btn_login = (Button) view.findViewById(R.id.btn_login);
+        //btn_login.setOnClickListener(this);
         return view;
     }
 
@@ -98,12 +94,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         } catch (NoSuchAlgorithmException e) {
 
         }
+
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateView();
+        //updateView();
+
     }
 
 
@@ -111,13 +110,16 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        /*Session session = Session.getActiveSession();
+        Session session = Session.getActiveSession();
         Log.d("Dogsom Session","sesion +"+ session.getApplicationId());
         if (session != null &&
                 (session.isOpened() || session.isClosed()) ) {
             onSessionStateChange(session, session.getState(), null);
-        }*/
+        }else{
+           authButton.setBackgroundResource(R.drawable.btn_facebook);
+        }
         uiHelper.onResume();
+
     }
 
     @Override
@@ -148,8 +150,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
+            Constants.setFbLogIn(getActivity(),true);
+            interfaz.iniciarDatos();
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");
+            Constants.setFbLogIn(getActivity(),false);
+            authButton.setBackgroundResource(R.drawable.btn_facebook);
         }
     }
 
@@ -160,40 +166,30 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void updateView(){
+   /* public void updateView(){
         if (interfaz.isLoggedIn()){
-            btn_tweet.setText("Tweet as " + interfaz.getSharedPreferences().getString("twitter_name", ""));
-            btn_tweet.setEnabled(true);
+
             btn_login.setText("Log Off Twitter");
         }else{
-            btn_tweet.setText("Not Logged in");
-            btn_tweet.setEnabled(false);
+
             btn_login.setText("Log In Twitter");
         }
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.btn_login: // btn que nos logea con tuiter
+           /* case R.id.btn_login: // btn que nos logea con tuiter
                 if (!interfaz.isLoggedIn()){
                     interfaz.logIn();
                 }else{
                     interfaz.logOut();
                 }
-                updateView();
-                break;
-           /* case R.id.btn_tweet: //btn para enviar un tuit, este tiene solo la fecha
-                Log.i(Constants.DEBUG_TAG,"el mensaje se envia ");
-                if (interfaz.isLoggedIn()){
-                    interfaz.sendTweet();
-                }
+                //updateView();
                 break;*/
-            case R.id.formulario:
-                Intent intent = new Intent(getActivity(),ActividadDatos.class);
-                startActivity(intent);
-                break;
+
+
         }
     }
 

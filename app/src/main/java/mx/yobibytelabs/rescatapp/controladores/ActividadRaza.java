@@ -37,7 +37,7 @@ public class ActividadRaza extends ActionBarActivity {
         TextView titulo = (TextView)findViewById(R.id.tvRaza);
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         titulo.setTypeface(multicolore);
-        titulo.setText("¿Qué Raza es "+ Confirmacion.getNombre());
+        titulo.setText("¿Qué Raza es "+ Confirmacion.getNombre()+"?");
         gridView = (GridView)findViewById(R.id.gridview);
         animales = new ArrayList<ListaRazas>();
         rellenarArrayList();

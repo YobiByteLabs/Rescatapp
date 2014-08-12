@@ -1,6 +1,5 @@
 package mx.yobibytelabs.rescatapp.controladores;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 
 import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.adapters.AnimalesAdapter;
-import mx.yobibytelabs.rescatapp.controladores.ActividadRaza;
 import mx.yobibytelabs.rescatapp.objetos.Animal;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
@@ -32,7 +30,7 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listview_talla);
+        setContentView(R.layout.activity_talla);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -63,10 +61,10 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
      */
     private void rellenarArrayList() {
 
-        animales.add(new Animal("Pequeño\nhasta 25cm", R.drawable.talla_petit));
-        animales.add(new Animal("Mediano\nde 27cm hasta 50cm", R.drawable.talla_mediano));
-        animales.add(new Animal("Grande\n de 53cm hasta  70cm", R.drawable.talla_grande));
-        animales.add(new Animal("¡Gigante!\n más de 76cm", R.drawable.talla_gigante));
+        animales.add(new Animal("Pequeño","hasta 25cm", R.drawable.talla_chico));
+        animales.add(new Animal("Mediano","de 27cm hasta 50cm", R.drawable.talla_mediano));
+        animales.add(new Animal("Grande","de 53cm hasta  70cm", R.drawable.talla_grande));
+        animales.add(new Animal("¡Gigante!","más de 76cm", R.drawable.talla_gigante));
     }
 
     @Override
