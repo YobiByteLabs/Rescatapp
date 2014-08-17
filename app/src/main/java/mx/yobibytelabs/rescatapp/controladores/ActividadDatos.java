@@ -3,8 +3,10 @@ package mx.yobibytelabs.rescatapp.controladores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -107,14 +109,23 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
             foto.setImageBitmap(newBitmap);
         } else if ((requestCode == SELECT_PHOTO && resultCode == RESULT_OK)) {
             Uri selectedImage = data.getData();
+            int orientacion = getOrientation(this,selectedImage);
             //InputStream imageStream = null;
             try {
                 // imageStream = getContentResolver().openInputStream(selectedImage);
                 Bitmap yourSelectedImage = BitmapManager.decodeUri(this, selectedImage);
-                if (yourSelectedImage.getHeight() < yourSelectedImage.getWidth()) {
+                if (orientacion==90) {
                     newBitmap = BitmapManager.getCircleBitmap(yourSelectedImage);
                     newBitmap = BitmapManager.rotateBitmap(newBitmap, 90);
-                } else {
+                } else if (orientacion==180){
+                    newBitmap = BitmapManager.getCircleBitmap(yourSelectedImage);
+                    newBitmap = BitmapManager.rotateBitmap(newBitmap, 180);
+                }
+                else if (orientacion==270){
+                    newBitmap = BitmapManager.getCircleBitmap(yourSelectedImage);
+                    newBitmap = BitmapManager.rotateBitmap(newBitmap, 2700);
+                }
+                else {
                     newBitmap = BitmapManager.getCircleBitmap(yourSelectedImage);
                 }
                 foto.setImageBitmap(newBitmap);
@@ -143,7 +154,21 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
         }
     };
 
+    public static int getOrientation(Context context, Uri photoUri) {
+        Cursor cursor = context.getContentResolver().query(photoUri,
+                new String[] { MediaStore.Images.ImageColumns.ORIENTATION },
+                null, null, null);
 
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0);
+            } else {
+                return -1;
+            }
+        } finally {
+            cursor.close();
+        }
+    }
     @Override
     public void onClick(View view) {
         Intent intent;
