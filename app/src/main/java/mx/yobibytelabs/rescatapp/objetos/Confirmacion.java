@@ -47,11 +47,11 @@ public  class Confirmacion {
         Confirmacion.raza = raza;
     }
 
-    public static String getTalla() {
+    public static int getTalla() {
         return talla;
     }
 
-    public static void setTalla(String talla) {
+    public static void setTalla(int talla) {
         Confirmacion.talla = talla;
     }
 
@@ -60,7 +60,7 @@ public  class Confirmacion {
     public static String cumpleaños;
     public static String sexo;
     public static String raza;
-    public static String talla;
+    public static int talla;
 
 
 

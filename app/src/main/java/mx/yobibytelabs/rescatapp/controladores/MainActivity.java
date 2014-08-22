@@ -109,6 +109,7 @@ public class MainActivity extends ActionBarActivity implements MainFragment.Inte
     @Override
     public void iniciarDatos(){
        Intent intent = new Intent(getBaseContext(),ActividadDatos.class);
+       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
        startActivity(intent);
     }
 

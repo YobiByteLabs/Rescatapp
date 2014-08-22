@@ -20,9 +20,11 @@ import mx.yobibytelabs.rescatapp.adapters.RazaAdapter;
 import mx.yobibytelabs.rescatapp.controladores.ActividadConfirmacion;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
+import mx.yobibytelabs.rescatapp.objetos.Perro;
+import mx.yobibytelabs.rescatapp.util.Rellenador;
 
 public class ActividadRaza extends ActionBarActivity {
-    private ArrayList<ListaRazas> animales;
+    private ArrayList<Perro> animales;
     private Typeface roboto;
 
     private GridView gridView;
@@ -39,26 +41,38 @@ public class ActividadRaza extends ActionBarActivity {
         titulo.setTypeface(multicolore);
         titulo.setText("¿Qué Raza es "+ Confirmacion.getNombre()+"?");
         gridView = (GridView)findViewById(R.id.gridview);
-        animales = new ArrayList<ListaRazas>();
-        rellenarArrayList();
+        animales = new ArrayList<Perro>();
+
+        rellenarLista(animales,Confirmacion.getTalla());
         gridView.setAdapter( new RazaAdapter(this,animales));
         gridView.setNumColumns(3);
 
     }
-    private void rellenarArrayList() {
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
-        animales.add(new ListaRazas("uno",R.drawable.dog_holder));
+
+    private void rellenarLista(ArrayList<Perro> animales, int talla) {
+
+        switch (talla){
+            case 1:
+                Rellenador.rellenarChicos(animales);
+                break;
+            case 2:
+                Rellenador.rellenarMedianos(animales);
+
+                break;
+            case 3:
+                Rellenador.rellenarGrandes(animales);
+                break;
+            case 4:
+                Rellenador.rellenarGigantes(animales);
+                break;
+            default:
+
+                break;
+
+        }
 
     }
+
 
 }
 

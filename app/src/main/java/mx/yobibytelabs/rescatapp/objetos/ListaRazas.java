@@ -3,11 +3,35 @@ package mx.yobibytelabs.rescatapp.objetos;
 public class ListaRazas {
     private String nombre = "";
     private int drawableImageID = 0;
+    private int id;
+    private int talla;
 
 
-    public ListaRazas(String nombre, int drawableImageID) {
+    public ListaRazas(int id, String nombre, int drawableImageID, int talla) {
         this.nombre = nombre;
         this.drawableImageID = drawableImageID;
+        this.id = id;
+        this.talla = talla;
+
+    }
+    public void setDrawableImageID(int drawableImageID) {
+        this.drawableImageID = drawableImageID;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTalla() {
+        return talla;
+    }
+
+    public void setTalla(int talla) {
+        this.talla = talla;
     }
 
     public String getNombre() {
@@ -21,7 +45,6 @@ public class ListaRazas {
     public int getDrawableImageID() {
         return drawableImageID;
     }
-
 
 
 }

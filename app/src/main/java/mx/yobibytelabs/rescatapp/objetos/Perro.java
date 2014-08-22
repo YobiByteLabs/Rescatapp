@@ -5,20 +5,14 @@ package mx.yobibytelabs.rescatapp.objetos;
  */
 public class Perro {
 
-    String id,nombre,talla;
+    String nombre;
+    int id,imagen,talla;
 
-    public Perro(String id,String nombre,String talla){
+    public Perro(String nombre, int id, int imagen,int talla){
         this.id = id;
         this.nombre = nombre;
         this.talla = talla;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -29,11 +23,27 @@ public class Perro {
         this.nombre = nombre;
     }
 
-    public String getTalla() {
+    public int getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTalla() {
         return talla;
     }
 
-    public void setTalla(String talla) {
+    public void setTalla(int talla) {
         this.talla = talla;
     }
 }

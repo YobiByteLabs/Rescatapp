@@ -24,8 +24,7 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
     private TextView titulo;
     private ListView lvAnimales;
     private AnimalesAdapter adapter;
-    private String nombre,cumpleaños,sexo;
-    Bitmap foto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
         animales = new ArrayList<Animal>();
         rellenarArrayList();
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
-        Typeface roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         titulo=(TextView)findViewById(R.id.textView);
         titulo.setText("¿Qué talla es "+ Confirmacion.getNombre()+"?");
         titulo.setTypeface(multicolore);
@@ -50,7 +48,6 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
         // Asignamos el Listener al ListView para cuando pulsamos sobre uno de
         // sus items.
         lvAnimales.setOnItemClickListener(this);
-        Toast.makeText(this, nombre + " " + cumpleaños, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -71,7 +68,7 @@ public class ActividadTalla extends ActionBarActivity implements OnItemClickList
     public void onItemClick(AdapterView<?> adapter, View view, int position,
                             long ID) {
         Intent intent = new Intent(this,ActividadRaza.class);
-        Confirmacion.setTalla(animales.get(position).getNombre());
+        Confirmacion.setTalla(position+1);
         startActivity(intent);
     }
 }

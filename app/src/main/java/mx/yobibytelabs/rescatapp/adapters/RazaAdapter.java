@@ -18,15 +18,16 @@ import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.controladores.ActividadConfirmacion;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
+import mx.yobibytelabs.rescatapp.objetos.Perro;
 
 
 public class RazaAdapter extends BaseAdapter{
 
 
     Context context;
-    List<ListaRazas> datos;
+    List<Perro> datos;
 
-    public RazaAdapter(Context context, ArrayList<ListaRazas> datos) {
+    public RazaAdapter(Context context, ArrayList<Perro> datos) {
         // Guardamos los par�metros en variables de clase.
         this.context = context;
         this.datos = datos;
@@ -57,27 +58,29 @@ public class RazaAdapter extends BaseAdapter{
         View vi = convertView;
         ViewHolder viewHolder;
         if(vi ==null) {
-            vi = ((LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE))
+            vi = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                     .inflate(R.layout.item_raza, null);
             viewHolder = new ViewHolder();
-            viewHolder.img_raza_adapter = (ImageView) vi.findViewById(R.id.img_raza_adapter);
-            viewHolder.lbl_raza_adapter = (TextView) vi.findViewById(R.id.lbl_raza_adapter);
 
-            Typeface roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
-            viewHolder.img_raza_adapter.setImageResource(datos.get(position).getDrawableImageID());
-
-            viewHolder.img_raza_adapter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    irAConfirmacion(position);
-                }
-            });
-            viewHolder.lbl_raza_adapter.setText(datos.get(position).getNombre());
-            viewHolder.lbl_raza_adapter.setTypeface(roboto);
-            vi.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)vi.getTag();
         }
+
+        viewHolder.img_raza_adapter = (ImageView) vi.findViewById(R.id.img_raza_adapter);
+        viewHolder.lbl_raza_adapter = (TextView) vi.findViewById(R.id.lbl_raza_adapter);
+
+        Typeface roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+        viewHolder.img_raza_adapter.setImageResource(datos.get(position).getImagen());
+
+        viewHolder.img_raza_adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                irAConfirmacion(position);
+            }
+        });
+        viewHolder.lbl_raza_adapter.setText(datos.get(position).getNombre());
+        viewHolder.lbl_raza_adapter.setTypeface(roboto);
+        vi.setTag(viewHolder);
         return vi;
     }
 
