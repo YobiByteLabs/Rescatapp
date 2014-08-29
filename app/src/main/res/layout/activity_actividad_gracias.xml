@@ -1,0 +1,208 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bkg_green"
+
+
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Gracias por participar!"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:id="@+id/textViewGraciasPorParticipar"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:text="Estamos desarrollando dogsom para que puedas:"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:id="@+id/textViewEstamos"
+        android:layout_below="@+id/textViewGraciasPorParticipar"
+        android:layout_marginTop="26dp"
+        android:layout_alignLeft="@+id/textMantente"
+        android:layout_alignStart="@+id/textMantente"
+        android:layout_alignRight="@+id/textMantente"
+        android:layout_alignEnd="@+id/textMantente" />
+
+
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:text="Obtener consejos para enteder mejor a tu perro"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:id="@+id/textViewObtener"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_below="@+id/textViewEstamos"
+        android:layout_toRightOf="@+id/imageConsejo1"
+        android:layout_toEndOf="@+id/imageConsejo1"
+        android:layout_alignRight="@+id/imageTwitter"
+        android:layout_alignEnd="@+id/imageTwitter" />
+
+
+
+    <TextView
+        android:layout_width="218dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+
+        android:layout_height="wrap_content"
+        android:text="Recordar cuando debes vacunar a tu campeón"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:id="@+id/textRecordar"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_toEndOf="@+id/imageConsejo1"
+        android:layout_below="@+id/textViewObtener"
+        android:layout_toRightOf="@+id/imageConsejo1"
+        android:layout_alignRight="@+id/imageTwitter"
+        android:layout_alignEnd="@+id/imageTwitter" />
+
+
+
+    <TextView
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:text="Planear paseos en parques cercanos a tu ubicación"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:layout_marginBottom="10dp"
+
+        android:id="@+id/textViewPlanear"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_below="@+id/textRecordar"
+        android:layout_alignLeft="@+id/textRecordar"
+        android:layout_alignStart="@+id/textRecordar"
+        android:layout_alignRight="@+id/textViewGraciasPorParticipar"
+        android:layout_alignEnd="@+id/textViewGraciasPorParticipar" />
+
+
+
+
+
+    <TextView
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:text="Adquirir accesorios y servicios con descuento"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:id="@+id/textViewAdquirir"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_below="@+id/textViewPlanear"
+        android:layout_alignLeft="@+id/textViewPlanear"
+        android:layout_alignStart="@+id/textViewPlanear"
+        android:layout_alignRight="@+id/imageTwitter"
+        android:layout_alignEnd="@+id/imageTwitter" />
+
+
+    <TextView
+        android:layout_marginTop="33dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Mantente al pendiente del avance de Dogsom:"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:id="@+id/textMantente"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_below="@+id/textViewAdquirir"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrar_sesion"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textViewCerrarSesion"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/imageFaceButton"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageFaceButton"
+        android:src="@drawable/icn_facebook"
+        android:layout_toStartOf="@+id/textViewCerrarSesion"
+        android:layout_below="@+id/textMantente"
+        android:layout_toLeftOf="@+id/textViewCerrarSesion" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageTwitter"
+        android:src="@drawable/icn_twitter"
+        android:layout_above="@+id/textViewCerrarSesion"
+        android:layout_toRightOf="@+id/textViewCerrarSesion"
+        android:layout_toEndOf="@+id/textViewCerrarSesion" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageConsejo1"
+        android:src="@drawable/icn_consejoschico"
+        android:layout_toEndOf="@+id/imageConsejo4"
+        android:layout_alignBottom="@+id/textViewObtener"
+        android:layout_alignLeft="@+id/imageConsejo4"
+        android:layout_alignStart="@+id/imageConsejo4"
+        android:layout_alignTop="@+id/textViewObtener"
+        android:layout_alignRight="@+id/imageConsejo4"
+        android:layout_alignEnd="@+id/imageConsejo4" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageConsejo2"
+        android:src="@drawable/icn_veterinario"
+        android:layout_toStartOf="@+id/textViewObtener"
+        android:layout_alignBottom="@+id/textRecordar"
+        android:layout_alignRight="@+id/imageConsejo1"
+        android:layout_alignEnd="@+id/imageConsejo1"
+        android:layout_alignLeft="@+id/imageConsejo1"
+        android:layout_alignStart="@+id/imageConsejo1"
+        android:layout_alignTop="@+id/textRecordar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageConsejo3"
+        android:src="@drawable/icn_mapa"
+        android:layout_toStartOf="@+id/textRecordar"
+        android:layout_alignTop="@+id/textViewPlanear"
+        android:layout_alignLeft="@+id/imageConsejo2"
+        android:layout_alignStart="@+id/imageConsejo2"
+        android:layout_alignBottom="@+id/textViewPlanear"
+        android:layout_toLeftOf="@+id/textRecordar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageConsejo4"
+        android:src="@drawable/icn_regalo"
+        android:layout_toStartOf="@+id/imageFaceButton"
+        android:layout_alignTop="@+id/textViewAdquirir"
+        android:layout_toLeftOf="@+id/imageFaceButton"
+        android:layout_alignBottom="@+id/textViewAdquirir" />
+
+</RelativeLayout>

@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="app_id">306841632809779</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_actividad_gracias">ActividadGracias</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="cerrar_sesion"><u>Cerrar Sesión</u></string>
 
 </resources>
