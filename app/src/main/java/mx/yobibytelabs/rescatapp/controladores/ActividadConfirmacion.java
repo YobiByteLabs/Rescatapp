@@ -13,6 +13,7 @@ import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
 
 public class ActividadConfirmacion extends ActionBarActivity implements View.OnClickListener {
+    
     private Button confirmar;
     private TextView datos,tnombre,tcumpleaños,traza,tsexo;
     private ImageView imageView;
