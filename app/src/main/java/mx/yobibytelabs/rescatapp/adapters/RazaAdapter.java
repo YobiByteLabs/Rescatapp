@@ -3,6 +3,7 @@ package mx.yobibytelabs.rescatapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,74 +22,68 @@ import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
 import mx.yobibytelabs.rescatapp.objetos.Perro;
 
 
-public class RazaAdapter extends BaseAdapter{
+public class RazaAdapter extends RecyclerView.Adapter<RazaAdapter.ViewHolder>{
 
 
-    Context context;
-    List<Perro> datos;
+    private ArrayList<Perro> datos;
+    private Typeface roboto;
+    private Context context;
+    OnItemClickListener mItemClickListener;
 
-    public RazaAdapter(Context context, ArrayList<Perro> datos) {
-        // Guardamos los par�metros en variables de clase.
-        this.context = context;
-        this.datos = datos;
+    public RazaAdapter(ArrayList<Perro> datos,Context context) {
+        this.datos = datos; this.context = context;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView lbl_raza_adapter;
+        public ImageView img_raza_adapter;
+        public ViewHolder(View v) {
+            super(v);
+            lbl_raza_adapter =(TextView) v.findViewById(R.id.lbl_raza_adapter);
+            img_raza_adapter = (ImageView) v.findViewById(R.id.img_raza_adapter);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(mItemClickListener != null){
+                mItemClickListener.onItemClick(view,getPosition());
+            }
+        }
     }
 
     @Override
-    public int getCount() {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_raza, parent, false);
+        roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.img_raza_adapter.setImageResource(datos.get(position).getImagen());
+
+        viewHolder.lbl_raza_adapter.setText(datos.get(position).getNombre());
+        viewHolder.lbl_raza_adapter.setTypeface(roboto);
+    }
+
+    @Override
+    public int getItemCount() {
         return datos.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return null;
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view , int position);
     }
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
-    public static class ViewHolder{
-       public ImageView img_raza_adapter;
-       public TextView lbl_raza_adapter;
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        View vi = convertView;
-        ViewHolder viewHolder;
-        if(vi ==null) {
-            vi = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-                    .inflate(R.layout.item_raza, null);
-            viewHolder = new ViewHolder();
-
-        }else{
-            viewHolder = (ViewHolder)vi.getTag();
-        }
-
-        viewHolder.img_raza_adapter = (ImageView) vi.findViewById(R.id.img_raza_adapter);
-        viewHolder.lbl_raza_adapter = (TextView) vi.findViewById(R.id.lbl_raza_adapter);
-
-        Typeface roboto = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
-        viewHolder.img_raza_adapter.setImageResource(datos.get(position).getImagen());
-
-        viewHolder.img_raza_adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                irAConfirmacion(position);
-            }
-        });
-        viewHolder.lbl_raza_adapter.setText(datos.get(position).getNombre());
-        viewHolder.lbl_raza_adapter.setTypeface(roboto);
-        vi.setTag(viewHolder);
-        return vi;
-    }
-
-
-    private void irAConfirmacion(int position) {
-        Confirmacion.setRaza(datos.get(position).getNombre());
-        Intent intent = new Intent(context, ActividadConfirmacion.class);
-        context.startActivity(intent);
-    }
 
 }
+
+

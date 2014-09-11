@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/png_bkg_profile"
+    android:background="@drawable/bkg_yellow"
     android:orientation="vertical">
 
 
@@ -15,25 +15,28 @@
             android:gravity="center"
             android:text="CREA EL PERFIL DE \nTU MASCOTA"
             android:textColor="#FFFFFF"
-            android:textSize="25sp" />
+            android:textSize="28sp" />
+
 
         <ImageView
             android:id="@+id/thumbnail"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:background="@drawable/bkg_img_foto"
             android:layout_marginTop="15dp"
             android:adjustViewBounds="true"
             android:clickable="true"
             android:src="@drawable/selector_boton_foto" />
 
+
     <ScrollView
         android:id="@+id/scrollView6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:background="#fff">
         <RelativeLayout
 
             android:layout_width="match_parent"
@@ -48,14 +51,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="Nombre"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:minLines="1"
+                android:background="@drawable/background_edits"
                 android:textColor="#8D8C8C"
-                android:textSize="15sp" />
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/input_cumpleanos"
@@ -67,32 +73,38 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/input_nombre"
                 android:ems="10"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/background_edits"
                 android:gravity="center"
-                android:hint="Cumpleaños"
+                android:hint="Fecha de Nacimiento"
                 android:inputType="textMultiLine"
                 android:maxLines="1"
                 android:minLines="1"
+                android:layout_marginTop="-1dp"
                 android:textColor="#8D8C8C"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp" />
+                android:textSize="24sp" />
 
 
             <RadioGroup
                 android:id="@+id/options"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:layout_below="@+id/input_cumpleanos"
                 android:gravity="center"
+                android:background="@drawable/background_edits"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="94.5dp"
+                    android:layout_marginRight="100dp"
                     android:button="@drawable/selector_radio_dog"
-                    android:paddingLeft="24dp"
+                    android:paddingLeft="4dp"
+                    android:textSize="24dp"
                     android:text=" Macho"
                     android:textColor="#8D8C8C" />
 
@@ -102,7 +114,8 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/selector_radio_dog"
                     android:checked="false"
-                    android:paddingLeft="24dp"
+                    android:paddingLeft="4dp"
+                    android:textSize="24dp"
                     android:text=" Hembra"
                     android:textColor="#8D8C8C" />
             </RadioGroup>
@@ -114,9 +127,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/options"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/selector_btn_rojo"
-                android:text="SIGUIENTE >"
+                android:text="SIGUIENTE"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>

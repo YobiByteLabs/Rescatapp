@@ -1,23 +1,23 @@
 package mx.yobibytelabs.rescatapp.controladores;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -53,9 +53,14 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(
-                R.layout.activity_datos);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_datos);
+   /*
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setIcon(R.drawable.selector_boton_back);
+        */
         nombre = (EditText) findViewById(R.id.input_nombre);
         cumpleaños = (EditText) findViewById(R.id.input_cumpleanos);
         continuar = (Button) findViewById(R.id.btn_continuar);
@@ -77,26 +82,6 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
         button1.setTypeface(typeFace2);
         button2.setTypeface(typeFace2);
         foto.setAdjustViewBounds(true);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -176,7 +161,7 @@ public class ActividadDatos extends ActionBarActivity implements View.OnClickLis
             case R.id.btn_continuar:
                 if (!nombre.getText().toString().equals("") && !cumpleaños.getText().toString().equals("")
                         && (button1.isChecked() || button2.isChecked()) && newBitmap != null) {
-                    intent = new Intent(this, ActividadTalla.class);
+                    intent = new Intent(this, ActividadRaza.class);
                     Confirmacion.setNombre(nombre.getText().toString());
                     Confirmacion.setCumpleaños(cumpleaños.getText().toString());
                     Confirmacion.setBitmap(newBitmap);

@@ -47,20 +47,11 @@ public  class Confirmacion {
         Confirmacion.raza = raza;
     }
 
-    public static int getTalla() {
-        return talla;
-    }
-
-    public static void setTalla(int talla) {
-        Confirmacion.talla = talla;
-    }
-
     public static Bitmap bitmap;
     public static String nombre;
     public static String cumpleaños;
     public static String sexo;
     public static String raza;
-    public static int talla;
 
 
 

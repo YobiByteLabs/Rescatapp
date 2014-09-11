@@ -1,9 +1,9 @@
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
+    android:background="@drawable/background_edits"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -12,18 +12,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/img_raza_adapter"
         android:src="@drawable/dog_holder"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Aquí va Nombre"
+        android:gravity="center_vertical"
+        android:textSize="26sp"
+        android:paddingTop="7dp"
+        android:textColor="#747474"
+        android:lines="1"
+        android:text="prueba"
+        android:minLines="1"
+        android:maxLines="1"
         android:id="@+id/lbl_raza_adapter"
-        android:layout_below="@+id/img_raza_adapter"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@+id/img_raza_adapter"
+        android:layout_toRightOf="@+id/img_raza_adapter"
+        android:layout_toEndOf="@+id/img_raza_adapter"
+        android:layout_marginLeft="42dp"
+        android:layout_alignBottom="@+id/img_raza_adapter" />
 </RelativeLayout>

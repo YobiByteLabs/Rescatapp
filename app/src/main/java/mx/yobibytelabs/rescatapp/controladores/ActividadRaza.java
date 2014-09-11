@@ -1,34 +1,31 @@
 package mx.yobibytelabs.rescatapp.controladores;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v7.widget.GridLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import mx.yobibytelabs.rescatapp.R;
 import mx.yobibytelabs.rescatapp.adapters.RazaAdapter;
-import mx.yobibytelabs.rescatapp.controladores.ActividadConfirmacion;
 import mx.yobibytelabs.rescatapp.objetos.Confirmacion;
-import mx.yobibytelabs.rescatapp.objetos.ListaRazas;
 import mx.yobibytelabs.rescatapp.objetos.Perro;
 import mx.yobibytelabs.rescatapp.util.Rellenador;
 
-public class ActividadRaza extends ActionBarActivity {
+public class ActividadRaza extends ActionBarActivity implements RazaAdapter.OnItemClickListener{
     private ArrayList<Perro> animales;
     private Typeface roboto;
 
-    private GridView gridView;
-
+    private RecyclerView my_recycler_view;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,41 +36,29 @@ public class ActividadRaza extends ActionBarActivity {
         TextView titulo = (TextView)findViewById(R.id.tvRaza);
         Typeface multicolore = Typeface.createFromAsset(getAssets(), "multicolore-webfont.ttf");
         titulo.setTypeface(multicolore);
-        titulo.setText("¿Qué Raza es "+ Confirmacion.getNombre()+"?");
-        gridView = (GridView)findViewById(R.id.gridview);
+        titulo.setText(new String("¿Qué Raza es \n"+ Confirmacion.getNombre()+"?"));
+
+
+        my_recycler_view = (RecyclerView)findViewById(R.id.my_recycler_view);
         animales = new ArrayList<Perro>();
+        my_recycler_view.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        my_recycler_view.setLayoutManager(mLayoutManager);
 
-        rellenarLista(animales,Confirmacion.getTalla());
-        gridView.setAdapter( new RazaAdapter(this,animales));
-        gridView.setNumColumns(3);
-
-    }
-
-    private void rellenarLista(ArrayList<Perro> animales, int talla) {
-
-        switch (talla){
-            case 1:
-                Rellenador.rellenarChicos(animales);
-                break;
-            case 2:
-                Rellenador.rellenarMedianos(animales);
-
-                break;
-            case 3:
-                Rellenador.rellenarGrandes(animales);
-                break;
-            case 4:
-                Rellenador.rellenarGigantes(animales);
-                break;
-            default:
-
-                break;
-
-        }
+        Rellenador.rellenarGigantes(animales);
+        RazaAdapter adapter  =  new RazaAdapter(animales,this);
+        adapter.setOnItemClickListener(this);
+        my_recycler_view.setAdapter(adapter);
+        my_recycler_view.setItemAnimator(new DefaultItemAnimator());
 
     }
 
-
+    @Override
+    public void onItemClick(View view, int position) {
+        Confirmacion.setRaza(animales.get(position).getNombre());
+        Intent intent = new Intent(ActividadRaza.this, ActividadConfirmacion.class);
+        startActivity(intent);
+    }
 }
 
 

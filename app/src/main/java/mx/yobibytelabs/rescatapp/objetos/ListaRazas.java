@@ -4,14 +4,12 @@ public class ListaRazas {
     private String nombre = "";
     private int drawableImageID = 0;
     private int id;
-    private int talla;
 
 
-    public ListaRazas(int id, String nombre, int drawableImageID, int talla) {
+    public ListaRazas(int id, String nombre, int drawableImageID) {
         this.nombre = nombre;
         this.drawableImageID = drawableImageID;
         this.id = id;
-        this.talla = talla;
 
     }
     public void setDrawableImageID(int drawableImageID) {
@@ -24,14 +22,6 @@ public class ListaRazas {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getTalla() {
-        return talla;
-    }
-
-    public void setTalla(int talla) {
-        this.talla = talla;
     }
 
     public String getNombre() {

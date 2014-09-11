@@ -6,12 +6,11 @@ package mx.yobibytelabs.rescatapp.objetos;
 public class Perro {
 
     String nombre;
-    int id,imagen,talla;
+    int id,imagen;
 
-    public Perro(String nombre, int id, int imagen,int talla){
+    public Perro(String nombre, int id, int imagen){
         this.id = id;
         this.nombre = nombre;
-        this.talla = talla;
         this.imagen = imagen;
     }
 
@@ -39,11 +38,4 @@ public class Perro {
         this.id = id;
     }
 
-    public int getTalla() {
-        return talla;
-    }
-
-    public void setTalla(int talla) {
-        this.talla = talla;
-    }
 }
