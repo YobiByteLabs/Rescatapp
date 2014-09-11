@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/classes-78f164b4b2f9bb293c54ce9555e8cbe38838b5e8.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/twitter4j-core-4.0.2-dcef90aac25960031e50d5d6060bda0cb3fbff1b.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/libs/twitter4j-core-4.0.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="381cf31e9200c2902782f17248d2af18e2ab4c56"/>
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/classes-cf49004360dcf9b98d3c95a69760b87819d26006.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0-rc1/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="14d500eeb7128db6c0f9b55f166c42eacf00f3b6"/>
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/android-support-v4-527f431b055381d6431d9e50403302a67e79e5d8.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/exploded-aar/Dogsom/facebook/unspecified/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="efec67655f6db90757faa37201efcee2a9ec3507"/>
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/classes-36bc270baa42030582c8ebb31dfef8f87da868a1.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/exploded-aar/Dogsom/facebook/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="40df9fe454313993b2e67e388718960649f0c039"/>
+    <item
+        dex="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/pre-dexed/debug/bolts-e49486faf9fae48b75630d212008f5b63324ef46.jar"
+        jar="/Users/jagspage2013/AndroidStudioProjects/Dogsom/app/build/intermediates/exploded-aar/Dogsom/facebook/unspecified/libs/bolts.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1e5ba33c837d05dcca9dc40a0ab458f8599d7aef"/>
+
+</pre-dex-items>
