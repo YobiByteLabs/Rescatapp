@@ -47,11 +47,11 @@ public  class Confirmacion {
         Confirmacion.raza = raza;
     }
 
-    public static Bitmap bitmap;
-    public static String nombre;
-    public static String cumpleaños;
-    public static String sexo;
-    public static String raza;
+    private static Bitmap bitmap;
+    private static String nombre;
+    private static String cumpleaños;
+    private static String sexo;
+    private static String raza;
 
 
 

@@ -42,7 +42,7 @@
         <activity
 
             android:name=".controladores.ActividadRaza"
-            android:label="Raza"
+            android:label="Escoge la Raza"
             android:parentActivityName=".controladores.ActividadDatos"
             android:screenOrientation="portrait" >
             <meta-data
@@ -51,7 +51,7 @@
         </activity>
         <activity
             android:name=".controladores.ActividadConfirmacion"
-            android:label="ConfirmaDatos"
+            android:label="Confirmar"
             android:parentActivityName=".controladores.ActividadRaza"
             android:screenOrientation="portrait" >
             <meta-data
