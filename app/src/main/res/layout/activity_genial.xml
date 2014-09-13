@@ -16,7 +16,7 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:layout_width="253dp"
+        android:layout_width="235dp"
         android:layout_height="185dp"
         android:id="@+id/imagenPerro"
         android:background="@drawable/bkg_badge"
@@ -31,7 +31,7 @@
         android:id="@+id/image_nombre"
         android:textColor="#6FB501"
         android:gravity="center"
-       android:text="Kenia"
+        android:text="Kenia"
         android:textSize="30sp"
         android:layout_below="@+id/imagenPerro"
         android:layout_centerHorizontal="true" />
@@ -59,6 +59,13 @@
         android:layout_below="@+id/tvparte_de_dogsom"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="160dp"
+        android:layout_height="145dp"
+        android:id="@+id/imagenPerro2"
+        android:layout_alignTop="@+id/imagenPerro"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

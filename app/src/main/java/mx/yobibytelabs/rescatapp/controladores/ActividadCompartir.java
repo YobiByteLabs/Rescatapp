@@ -40,7 +40,7 @@ public class ActividadCompartir extends ActionBarActivity implements View.OnClic
 
         imagenNombre.setText(Confirmacion.getNombre());
 
-        imagenPerro = (ImageView)findViewById(R.id.imagenPerro);
+        imagenPerro = (ImageView)findViewById(R.id.imagenPerro2);
         imagenPerro.setImageBitmap(Confirmacion.getBitmap());
 
         boton_continuar = (Button)findViewById(R.id.button_continuar);
